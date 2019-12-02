@@ -6,7 +6,7 @@ class PDF extends FPDF
     //CABECERA
     function Header(){
         //logo
-       // $this->Image('logo.png',10,8,33);
+        $this->Image('imagenes/logo.png',7,3,33);
         //arial bold 15
         $this->SetFont('Arial','B',15);
         //mov derecha
@@ -16,7 +16,7 @@ class PDF extends FPDF
         //salto de linea
         $this->Ln(20);
        
-        $this->Cell(100,10,'LISTA INFORMACION DE DIRECTORES',0,0,'C');
+        $this->Cell(140,10,'LISTA INFORMACION DE DIRECTORES',0,0,'C');
         //salto de linea
         $this->Ln(20);
     }

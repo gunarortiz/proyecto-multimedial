@@ -6,7 +6,7 @@ class PDF extends FPDF
     //CABECERA
     function Header(){
         //logo
-       // $this->Image('logo.png',10,8,33);
+        $this->Image('imagenes/logo.png',7,3,33);
         //arial bold 15
         $this->SetFont('Arial','B',15);
         //mov derecha
@@ -16,7 +16,7 @@ class PDF extends FPDF
         //salto de linea
         $this->Ln(20);
        
-        $this->Cell(100,10,'LISTA INFORMACION DE ACTORES',0,0,'C');
+        $this->Cell(130,10,'LISTA INFORMACION DE TECNICOS',0,0,'C');
         //salto de linea
         $this->Ln(20);
     }
@@ -31,27 +31,23 @@ class PDF extends FPDF
     }
 }
 
-$consulta = "SELECT * FROM actor";
+$consulta = "SELECT * FROM tecnico";
 $resultado = $conexion->query($consulta);
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
-$pdf->SetX(17);
+$pdf->SetX(50);
 $pdf->Cell(15, 10, 'Nro', 1, 0, 'C', 0);
-$pdf->Cell(30, 10, 'ID Actor', 1, 0, 'C', 0);
-$pdf->Cell(30, 10, 'Sueldo', 1, 0, 'C', 0);
-$pdf->Cell(50, 10, 'Tipo', 1, 0, 'C', 0);
-$pdf->Cell(50, 10, 'Anio Debut', 1, 1, 'C', 0);
+$pdf->Cell(30, 10, 'ID Tecnico', 1, 0, 'C', 0);
+$pdf->Cell(50, 10, 'Trabajo', 1, 1, 'C', 0);
 $c=1;
 $pdf->SetFont('Arial','',10);
 while($row = $resultado->fetch_assoc()){
-    $pdf->SetX(17);
+    $pdf->SetX(50);
     $pdf->Cell(15, 10, $c , 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, $row['idactor'], 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, $row['sueldo'], 1, 0, 'C', 0);
-    $pdf->Cell(50, 10, $row['tipo'], 1, 0, 'C', 0);
-    $pdf->Cell(50, 10, $row['anio_debut'], 1, 1, 'C', 0);
+    $pdf->Cell(30, 10, $row['idtec'], 1, 0, 'C', 0);
+    $pdf->Cell(50, 10, $row['mat_trabajo'], 1, 1, 'C', 0);
     $c+=1;    
 }
 

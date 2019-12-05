@@ -1,7 +1,7 @@
 <?php include("base_datos/bd.php")?>
 
 <?php include("partes/header.php")?>
-<div class="container p-4">
+<div class="container contenedor p-4">
     <div class="row">
         <div class="col-md-4">
                 <h1>Asistentes</h1>

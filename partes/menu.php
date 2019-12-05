@@ -4,7 +4,7 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="index.php"><i class="menu-icon fa fa-home"></i>Home </a>
+                    <a href="home.php"><i class="menu-icon fa fa-home"></i>Home </a>
                 </li>
                 <li class="menu-title">Reportes</li><!-- /.menu-title -->
                 <li class="">
@@ -36,6 +36,7 @@
                     <a href="personalproduccion.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Personal Producción</a>
                     <a href="programas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Programas</a>
                     <a href="tecnicos.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Tecnicos</a>
+                    <a href="base_datos/logout.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Salir</a>
                 </li>
                 
             </ul>

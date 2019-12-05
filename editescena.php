@@ -1,6 +1,6 @@
 <?php
-    include("base_datos/bd.php");
-
+    include('session.php');
+    
     if(isset($_GET['nroescena'])){
        $nroescena = $_GET['nroescena'];
        $query = "SELECT * FROM escena WHERE nroescena = '$nroescena'";

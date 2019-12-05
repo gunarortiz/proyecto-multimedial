@@ -1,4 +1,4 @@
-<?php include("base_datos/bd.php")?>
+<?php include('session.php');?>
 
 <?php include("partes/header.php")?>
 <div class="container contenedor p-4">
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nro Temporada</th>
+                            <th>Nro Temp</th>
                             <th>Nombre</th>
                             <th>Id Programa</th>
                             <th>Acción</th>
@@ -60,7 +60,7 @@
                                 <td><?php echo $row['idepi']?></td>
                                 <td><?php echo $row['nrotemporada']?></td>
                                 <td><?php echo $row['nombre']?></td>
-                                <td><?php echo $row['idprog']?></td>
+                                <td><?php echo $row['idProg']?></td>
                                 <td> 
                                     <a href="editespisodio.php?idepi=<?php echo $row['idepi']?>" class="btn btn-secondary">
                                         <i class="fa fa-pencil"></i>

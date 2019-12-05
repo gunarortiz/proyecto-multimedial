@@ -1,6 +1,6 @@
 <?php
 include('partes/header.php');
-include('base_datos/bd.php');
+include('session.php');
 
 $query = "SELECT idprog, nombre FROM programa p";
 $resp = mysqli_query($conexion, $query);

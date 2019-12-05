@@ -1,5 +1,5 @@
 <?php
-    include("base_datos/bd.php");
+    include('session.php');
 
     if(isset($_GET['idambiente'])){
        $idambiente = $_GET['idambiente'];

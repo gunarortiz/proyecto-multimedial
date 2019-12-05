@@ -1,4 +1,4 @@
-<?php include("base_datos/bd.php")?>
+<?php include('session.php');?>
 
 <?php include("partes/header.php")?>
 <div class="container contenedor p-4">

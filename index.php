@@ -13,7 +13,7 @@
 					<img src="logo.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" action="" method = "post">
+				<form class="login100-form validate-form" action="login.php" method="post">
 					<span class="login100-form-title">
                     Series de television
 					</span>
@@ -27,7 +27,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="passcode" placeholder="Password">
+						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
@@ -35,7 +35,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Ingresar
 						</button>
 					</div>
@@ -44,34 +44,3 @@
 			</div>
 		</div>
 	</div>
-
-
-    <?php
-   include("base_datos/bd.php");
-   session_start();
-   
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      
-      $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
-      
-      $sql = "SELECT id FROM admin WHERE username = '$myusername' and passcode = '$mypassword'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    //   $active = $row['active'];
-      
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
-         
-         header("location: home.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      }
-   }
-?>

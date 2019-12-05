@@ -60,7 +60,7 @@
                                 <td><?php echo $row['idepi']?></td>
                                 <td><?php echo $row['nrotemporada']?></td>
                                 <td><?php echo $row['nombre']?></td>
-                                <td><?php echo $row['idprog']?></td>
+                                <td><?php echo $row['idProg']?></td>
                                 <td> 
                                     <a href="editespisodio.php?idepi=<?php echo $row['idepi']?>" class="btn btn-secondary">
                                         <i class="fa fa-pencil"></i>

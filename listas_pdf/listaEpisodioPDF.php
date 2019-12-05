@@ -39,8 +39,8 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
 $pdf->SetX(17);
 $pdf->Cell(15, 10, 'Nro', 1, 0, 'C', 0);
-$pdf->Cell(40, 10, 'ID Episodio', 1, 0, 'C', 0);
-$pdf->Cell(50, 10, 'Nombre', 1, 0, 'C', 0);
+$pdf->Cell(30, 10, 'ID Episodio', 1, 0, 'C', 0);
+$pdf->Cell(60, 10, 'Nombre', 1, 0, 'C', 0);
 $pdf->Cell(30, 10, 'Nro Temporada', 1, 0, 'C', 0);
 $pdf->Cell(40, 10, 'ID Programa', 1, 1, 'C', 0);
 $c=1;
@@ -48,10 +48,10 @@ $pdf->SetFont('Arial','',10);
 while($row = $resultado->fetch_assoc()){
     $pdf->SetX(17);
     $pdf->Cell(15, 10, $c , 1, 0, 'C', 0);
-    $pdf->Cell(40, 10, $row['idepi'], 1, 0, 'C', 0);
-    $pdf->Cell(50, 10, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(30, 10, $row['idepi'], 1, 0, 'C', 0);
+    $pdf->Cell(60, 10, $row['nombre'], 1, 0, 'C', 0);
     $pdf->Cell(30, 10, $row['nrotemporada'], 1, 0, 'C', 0);
-    $pdf->Cell(40, 10, $row['idprog'], 1, 1, 'C', 0);
+    $pdf->Cell(40, 10, $row['idProg'], 1, 1, 'C', 0);
     $c+=1;    
 }
 

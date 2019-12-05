@@ -68,10 +68,10 @@
                                 <td><?php echo $row['pais']?></td>
                                 <td> 
                                     <a href="editprograma.php?idprog=<?php echo $row['idprog']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliprograma.php?idprog=<?php echo $row['idprog']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

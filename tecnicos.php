@@ -54,10 +54,10 @@
                                 <td><?php echo $row['mat_trabajo']?></td>
                                 <td> 
                                     <a href="edittecnico.php?idtec=<?php echo $row['idtec']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="elitecnico.php?idtec=<?php echo $row['idtec']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

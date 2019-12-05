@@ -53,10 +53,10 @@
                                 <td><?php echo $row['tipo']?></td>
                                 <td> 
                                     <a href="editAmbiente.php?idambiente=<?php echo $row['idambiente']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliAmbiente.php?idambiente=<?php echo $row['idambiente']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

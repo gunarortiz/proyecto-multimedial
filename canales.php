@@ -58,10 +58,10 @@
                                 <td><?php echo $row['nombrec']?></td>
                                 <td> 
                                     <a href="editCanal.php?idcanal=<?php echo $row['idcanal']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliCanal.php?idcanal=<?php echo $row['idcanal']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

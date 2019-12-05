@@ -58,10 +58,10 @@
                                 <td><?php echo $row['duracion']?></td>
                                 <td> 
                                     <a href="editescena.php?nroescena=<?php echo $row['nroescena']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliescena.php?nroescena=<?php echo $row['nroescena']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

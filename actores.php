@@ -63,10 +63,10 @@
                                 <td><?php echo $row['anio_debut']?></td>
                                 <td> 
                                     <a href="editActor.php?idactor=<?php echo $row['idactor']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliActor.php?idactor=<?php echo $row['idactor']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

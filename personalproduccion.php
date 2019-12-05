@@ -58,10 +58,10 @@
                                 <td><?php echo $row['sueldo']?></td>
                                 <td> 
                                     <a href="editpersonalproduccion.php?idper=<?php echo $row['idper']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="elipersonalproduccion.php?idper=<?php echo $row['idper']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

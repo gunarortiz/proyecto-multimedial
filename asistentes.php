@@ -53,10 +53,10 @@
                                 <td><?php echo $row['especialidad']?></td>
                                 <td> 
                                     <a href="editAsistente.php?idasi=<?php echo $row['idasi']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="eliAsistente.php?idasi=<?php echo $row['idasi']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

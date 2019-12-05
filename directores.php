@@ -53,10 +53,10 @@
                                 <td><?php echo $row['cargo']?></td>
                                 <td> 
                                     <a href="editdirector.php?iddire=<?php echo $row['iddire']?>" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
+                                        <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="elidirector.php?iddire=<?php echo $row['iddire']?>" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
+                                        <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>
                             </tr>

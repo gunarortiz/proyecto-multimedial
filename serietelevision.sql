@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-12-2019 a las 02:35:18
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.3
+-- Tiempo de generación: 05-12-2019 a las 16:07:31
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -22,6 +22,35 @@ SET time_zone = "+00:00";
 -- Base de datos: `serietelevision`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Ecursores` ()  BEGIN
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE ans text DEFAULT '';
+  DECLARE nom text;
+  DECLARE ape text;
+  DECLARE t text;
+
+  DECLARE cur1 CURSOR FOR SELECT p.nombre, p.apellido, a.tipo FROM persona p, actor a where p.idper = a.idactor and a.año_debut = 2005;
+
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  OPEN cur1;
+  read_loop: LOOP
+    FETCH cur1 INTO nom, ape, t;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+    	set ans = concat('Nombre: ',nom,' ',ape,' Tipo: ',t);
+        SELECT ans;
+  END LOOP;
+  CLOSE cur1;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -29,37 +58,58 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `actor` (
-  `idactor` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `idactor` int(11) NOT NULL,
   `sueldo` int(11) DEFAULT NULL,
-  `tipo` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `anio_debut` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `tipo` text,
+  `anio_debut` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `actor`
 --
 
 INSERT INTO `actor` (`idactor`, `sueldo`, `tipo`, `anio_debut`) VALUES
-('act1', 1600, 'Secundario', '2010-07-17'),
-('act10', 1600, 'Secundario', '1996-07-17'),
-('act11', 1600, 'Secundario', '2010-12-15'),
-('act12', 1600, 'Secundario', '2015-07-16'),
-('act13', 1600, 'Reparto', '1980-07-18'),
-('act14', 1600, 'Figurante', '1999-07-19'),
-('act15', 1600, 'Pequeño', '1989-09-17'),
-('act16', 2000, 'Protagonista', '2000-09-14'),
-('act17', 2000, 'Protagonista', '1990-03-14'),
-('act18', 2000, 'Protagonista', '1972-08-15'),
-('act19', 1600, 'Figurante', '1978-08-17'),
-('act2', 2000, 'Protagonista', '2015-07-17'),
-('act20', 1600, 'Reparto', '1996-06-17'),
-('act3', 1600, 'Reparto', '1980-07-17'),
-('act4', 1600, 'Figurante', '1999-07-17'),
-('act5', 1600, 'Pequeño', '1989-07-17'),
-('act6', 1600, 'Secundario', '2000-07-17'),
-('act7', 2000, 'Protagonista', '1990-07-17'),
-('act8', 1600, 'Reparto', '1972-07-17'),
-('act9', 1600, 'Figurante', '1978-07-17');
+(1, 3500, 'Reparto', 2015),
+(3, 5000, 'Protagonista', 2000),
+(10, 4860, 'Secundario', 2013),
+(15, 3800, 'Reparto', 2000),
+(16, 5320, 'Secundario', 1980),
+(19, 6500, 'Protagonista', 1998),
+(25, 3400, 'Reparto', 1980),
+(29, 4710, 'secundario', 2000),
+(30, 7000, 'Protagonista', 1988),
+(34, 3900, 'Extra', 1997),
+(39, 4500, 'Secundario', 1981),
+(41, 2500, 'Reparto', 2000),
+(43, 7858, 'Protagonista', 2009),
+(46, 6300, 'Protagonista', 2013),
+(48, 3850, 'Reparto', 1994),
+(52, 3964, 'Reparto', 2005),
+(56, 9000, 'Protagonista', 2013),
+(58, 3930, 'Reparto', 2015),
+(60, 5500, 'Secundario', 1999),
+(61, 3940, 'Reparto', 2016),
+(62, 9800, 'Protagonista', 1991),
+(63, 7632, 'Protagonista', 2004),
+(66, 4700, 'Secundario', 2001),
+(68, 3960, 'Reparto', 2010),
+(70, 5800, 'Secundario', 2017),
+(72, 4100, 'Extra', 1998),
+(76, 4330, 'Secundario', 2013),
+(78, 7800, 'Protagonista', 1985),
+(80, 3555, 'Reparto', 2002),
+(84, 7320, 'Protagonista', 2010),
+(89, 4000, 'Extra', 2003),
+(90, 4890, 'Secundario', 2000),
+(91, 8900, 'Protagonista', 2014),
+(92, 5500, 'Secundario', 2005),
+(93, 3740, 'Reparto', 2012),
+(95, 4800, 'Secundario', 2007),
+(96, 4000, 'Reparto', 2008),
+(97, 8410, 'Protagonista', 1999),
+(98, 8000, 'Protagonista', 2007),
+(100, 3800, 'Reparto', 2002),
+(102, 6000, 'Secundario', 1995);
 
 -- --------------------------------------------------------
 
@@ -68,35 +118,30 @@ INSERT INTO `actor` (`idactor`, `sueldo`, `tipo`, `anio_debut`) VALUES
 --
 
 CREATE TABLE `ambiente` (
-  `idambiente` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idambiente` int(11) NOT NULL,
+  `tipo` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ambiente`
 --
 
 INSERT INTO `ambiente` (`idambiente`, `tipo`) VALUES
-('amb100', 'colegio'),
-('amb110', 'acuario'),
-('amb120', 'colegio'),
-('amb130', 'casa'),
-('amb140', 'cuarto1'),
-('amb150', 'cuarto2'),
-('amb160', 'baño'),
-('amb170', 'cocina'),
-('amb180', 'sala'),
-('amb190', 'garaje'),
-('amb200', 'casa'),
-('amb210', 'patio'),
-('amb220', 'acuario'),
-('amb300', 'cuarto1'),
-('amb400', 'cuarto2'),
-('amb500', 'baño'),
-('amb600', 'cocina'),
-('amb700', 'sala'),
-('amb800', 'garaje'),
-('amb900', 'patio');
+(301, 'Edificio en el centro'),
+(302, 'Sur de Estados Unidos'),
+(303, 'Ciudad en Londres'),
+(304, 'New York'),
+(305, 'California'),
+(306, 'España'),
+(307, 'Oeste de los Estados Unidos'),
+(308, 'pais medieval'),
+(309, 'Universidad de EEUU'),
+(310, 'Casa familiar'),
+(311, 'Campus Universitaro'),
+(312, 'Condominios'),
+(313, 'Hospital'),
+(314, 'Vecindad'),
+(315, 'Estacion de policias');
 
 -- --------------------------------------------------------
 
@@ -105,35 +150,52 @@ INSERT INTO `ambiente` (`idambiente`, `tipo`) VALUES
 --
 
 CREATE TABLE `asistente` (
-  `idasi` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `especialidad` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idasi` int(11) NOT NULL,
+  `especialidad` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `asistente`
 --
 
 INSERT INTO `asistente` (`idasi`, `especialidad`) VALUES
-('asi01', 'iluminacion'),
-('asi02', 'vestuario'),
-('asi03', 'decoracion'),
-('asi04', 'color'),
-('asi05', 'sonido'),
-('asi06', 'musica'),
-('asi07', 'iluminacion'),
-('asi08', 'vestuario'),
-('asi09', 'decoracion'),
-('asi10', 'color'),
-('asi11', 'iluminacion'),
-('asi12', 'vestuario'),
-('asi13', 'decoracion'),
-('asi14', 'color'),
-('asi15', 'sonido'),
-('asi16', 'musica'),
-('asi17', 'iluminacion'),
-('asi18', 'vestuario'),
-('asi19', 'decoracion'),
-('asi20', 'color');
+(2, 'Maquillista'),
+(5, 'Colaborador'),
+(6, 'Maquillista'),
+(9, 'Vestuario'),
+(13, 'Maquillista'),
+(14, 'Colaborador'),
+(20, 'Vestuario'),
+(21, 'Maquillista'),
+(22, 'Maquillista'),
+(24, 'Vestuario'),
+(26, 'Maquillista'),
+(28, 'Maquillista'),
+(32, 'Colaborador'),
+(33, 'Vestuario'),
+(35, 'Maquillista'),
+(38, 'Maquillista'),
+(40, 'Vestuario'),
+(42, 'Maquillista'),
+(45, 'Maquillista'),
+(47, 'Maquillista'),
+(49, 'Colaborador'),
+(50, 'Maquillista'),
+(53, 'Colaborador'),
+(55, 'Vestuario'),
+(57, 'Maquillista'),
+(65, 'Maquillista'),
+(67, 'Vestuario'),
+(69, 'Maquillista'),
+(73, 'Colaborador'),
+(74, 'Maquillista'),
+(77, 'Maquillista'),
+(82, 'Vestuario'),
+(85, 'Maquillista'),
+(86, 'Maquillista'),
+(94, 'Colaborador'),
+(99, 'Maquillista'),
+(104, 'Maquillista');
 
 -- --------------------------------------------------------
 
@@ -142,36 +204,35 @@ INSERT INTO `asistente` (`idasi`, `especialidad`) VALUES
 --
 
 CREATE TABLE `canal` (
-  `idcanal` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `idcanal` int(11) NOT NULL,
   `nroemi` int(11) DEFAULT NULL,
-  `nombrec` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `nombrec` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `canal`
 --
 
 INSERT INTO `canal` (`idcanal`, `nroemi`, `nombrec`) VALUES
-('can01', 777, 'fox'),
-('can02', 122, 'tnt'),
-('can03', 586, 'atb'),
-('can04', 574, 'warner'),
-('can05', 562, 'cinecanal'),
-('can06', 525, 'el trece'),
-('can07', 613, 'a&e'),
-('can08', 758, 'history'),
-('can09', 714, 'axn'),
-('can10', 912, 'golden'),
-('can11', 5, 'Bolivision'),
-('can12', 2, 'Unitel'),
-('can13', 100, 'Discovery'),
-('can14', 106, 'Nick Jr'),
-('can15', 121, 'DisneyXD'),
-('can16', 127, 'Disney'),
-('can17', 130, 'Boomerang'),
-('can18', 218, 'TL Novelas'),
-('can19', 353, 'NatGeo wild'),
-('can20', 365, 'Tru TV');
+(201, 7, 'Bolivision'),
+(202, 9, 'ATB'),
+(203, 11, 'UNO'),
+(204, 39, 'PAT'),
+(205, 203, 'Fox-life'),
+(206, 306, 'TNT Series'),
+(207, 318, 'Warner Bros'),
+(208, 321, 'AXN'),
+(209, 330, 'FOX'),
+(210, 333, 'FX'),
+(211, 364, 'CineCanal'),
+(212, 406, 'TNT'),
+(213, 412, 'Golden'),
+(214, 418, 'Studio'),
+(215, 427, 'Space'),
+(216, 430, 'Universal'),
+(217, 618, 'el trece'),
+(218, 624, 'Telemundo'),
+(219, 812, 'Fox Series');
 
 -- --------------------------------------------------------
 
@@ -180,35 +241,89 @@ INSERT INTO `canal` (`idcanal`, `nroemi`, `nombrec`) VALUES
 --
 
 CREATE TABLE `cuenta` (
-  `idprog` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `idper` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idprog` int(11) NOT NULL,
+  `idper` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cuenta`
 --
 
 INSERT INTO `cuenta` (`idprog`, `idper`) VALUES
-('pro01', 'per01'),
-('pro02', 'per02'),
-('pro03', 'per03'),
-('pro04', 'per04'),
-('pro05', 'per05'),
-('pro06', 'per06'),
-('pro07', 'per07'),
-('pro08', 'per08'),
-('pro09', 'per09'),
-('pro10', 'per10'),
-('pro11', 'per11'),
-('pro12', 'per12'),
-('pro13', 'per13'),
-('pro14', 'per14'),
-('pro15', 'per15'),
-('pro16', 'per16'),
-('pro17', 'per17'),
-('pro18', 'per18'),
-('pro19', 'per19'),
-('pro20', 'per20');
+(101, 2),
+(101, 4),
+(101, 5),
+(101, 6),
+(101, 7),
+(101, 8),
+(101, 9),
+(101, 11),
+(101, 13),
+(101, 14),
+(102, 17),
+(102, 18),
+(102, 20),
+(102, 21),
+(102, 22),
+(102, 23),
+(102, 26),
+(103, 28),
+(103, 31),
+(103, 32),
+(103, 33),
+(104, 35),
+(104, 36),
+(104, 37),
+(104, 38),
+(104, 40),
+(104, 42),
+(105, 44),
+(105, 45),
+(105, 47),
+(105, 49),
+(105, 50),
+(105, 51),
+(105, 53),
+(105, 54),
+(105, 55),
+(105, 57),
+(106, 59),
+(106, 65),
+(106, 67),
+(106, 69),
+(106, 73),
+(106, 74),
+(106, 75),
+(106, 77),
+(106, 81),
+(106, 82),
+(106, 85),
+(106, 86),
+(107, 87),
+(108, 94),
+(109, 99),
+(110, 101),
+(110, 104),
+(110, 105),
+(111, 106),
+(111, 107),
+(111, 108),
+(111, 109),
+(112, 110),
+(112, 111),
+(112, 112),
+(113, 114),
+(114, 115),
+(115, 116),
+(115, 117),
+(115, 118),
+(115, 119),
+(115, 120),
+(115, 121),
+(115, 122),
+(115, 123),
+(115, 124),
+(115, 125);
 
 -- --------------------------------------------------------
 
@@ -217,35 +332,45 @@ INSERT INTO `cuenta` (`idprog`, `idper`) VALUES
 --
 
 CREATE TABLE `director` (
-  `iddire` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `cargo` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `iddire` int(11) NOT NULL,
+  `cargo` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `director`
 --
 
 INSERT INTO `director` (`iddire`, `cargo`) VALUES
-('dir01', 'mañana'),
-('dir02', 'tarde'),
-('dir03', 'tarde'),
-('dir04', 'mañana'),
-('dir05', 'mañana'),
-('dir06', 'tarde'),
-('dir07', 'mañana'),
-('dir08', 'tarde'),
-('dir09', 'mañana'),
-('dir10', 'tarde'),
-('dir11', 'mañana'),
-('dir12', 'tarde'),
-('dir13', 'tarde'),
-('dir14', 'mañana'),
-('dir15', 'mañana'),
-('dir16', 'tarde'),
-('dir17', 'mañana'),
-('dir18', 'tarde'),
-('dir19', 'mañana'),
-('dir20', 'tarde');
+(4, 'Escenografo'),
+(7, 'Guionista'),
+(8, 'Productor'),
+(11, 'Escenografo'),
+(12, 'Guionista'),
+(17, 'Escenografo'),
+(18, 'Productor'),
+(23, 'Escenografo'),
+(31, 'Productor'),
+(36, 'Guionista'),
+(37, 'Escenografo'),
+(44, 'Productor'),
+(51, 'Escenografo'),
+(54, 'Productor'),
+(59, 'Guionista'),
+(75, 'Escenografo'),
+(81, 'Escenografo'),
+(87, 'Escenografo'),
+(101, 'Productor'),
+(115, 'Escenografo'),
+(116, 'Guionista'),
+(117, 'Guionista'),
+(118, 'Productor'),
+(119, 'Escenografo'),
+(120, 'Guionista'),
+(121, 'Escenografo'),
+(122, 'Productor'),
+(123, 'Escenografo'),
+(124, 'Guionista'),
+(125, 'Escenografo');
 
 -- --------------------------------------------------------
 
@@ -254,37 +379,104 @@ INSERT INTO `director` (`iddire`, `cargo`) VALUES
 --
 
 CREATE TABLE `episodio` (
-  `idepi` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `nombre` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `idepi` int(11) NOT NULL,
+  `nombre` text,
   `nrotemporada` int(11) DEFAULT NULL,
-  `idprog` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idProg` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `episodio`
 --
 
-INSERT INTO `episodio` (`idepi`, `nombre`, `nrotemporada`, `idprog`) VALUES
-('epi01', 'piloto', 2, 'pro07'),
-('epi02', 'empapada', 2, 'pro07'),
-('epi03', 'pinguino', 2, 'pro07'),
-('epi04', 'el amiguito y el leon', 2, 'pro07'),
-('epi05', 'prendido fuego', 1, 'pro07'),
-('epi06', 'el huevo', 1, 'pro07'),
-('epi07', 'la guarida del dragon', 1, 'pro07'),
-('epi08', 'borron y cuenta nueva', 1, 'pro07'),
-('epi09', 'vivir en altura', 1, 'pro07'),
-('epi10', 'ernest', 1, 'pro07'),
-('epi11', 'Dia del Trabajo', 3, 'pro09'),
-('epi12', 'La fortuna y el amor', 3, 'pro09'),
-('epi13', 'Como ser artista', 3, 'pro09'),
-('epi14', 'Bienvenidos', 1, 'pro10'),
-('epi15', 'Deseo', 1, 'pro10'),
-('epi16', 'Sabado Noche', 1, 'pro10'),
-('epi17', 'El monologo del pajaro', 1, 'pro11'),
-('epi18', 'Combate escenico', 1, 'pro11'),
-('epi19', 'La Canción de la Semana', 1, 'pro11'),
-('epi20', 'Jade bota a Beck', 1, 'pro11');
+INSERT INTO `episodio` (`idepi`, `nombre`, `nrotemporada`, `idProg`) VALUES
+(1, 'La hipotesis del gran cerebro', 1, 101),
+(2, 'El experto del saltamontes', 1, 101),
+(3, 'La dualidad de Jerusalen', 1, 101),
+(4, 'La topologia de la bragueta', 2, 101),
+(5, 'La alternativa de Euclides', 2, 101),
+(6, 'El algoritmo de la amistad', 2, 101),
+(7, 'El vortex psiquico', 3, 101),
+(8, 'La aproximacion de Einstein', 3, 101),
+(9, 'La liga de la justicia: Recombinacion', 4, 101),
+(10, 'Loa glosbos y las tijeras', 1, 102),
+(11, 'Un banio para el chavo', 1, 102),
+(12, 'El ropavejero', 2, 102),
+(14, 'Don ramon peluquero', 3, 102),
+(15, 'Las escondidas y la caja de madera', 5, 102),
+(16, 'Año nuevo en casa de don Ramon', 6, 102),
+(17, 'Showmance', 1, 103),
+(18, 'Acafellas', 1, 103),
+(19, 'Preggers', 1, 103),
+(20, 'The new Rachel', 4, 103),
+(21, 'Glease', 4, 103),
+(22, 'I do', 4, 103),
+(23, 'trio', 5, 103),
+(24, '100', 5, 103),
+(25, 'Cat in the bag', 1, 104),
+(26, 'Grilled', 2, 104),
+(27, 'Green light', 3, 104),
+(28, 'Box Cutter', 4, 104),
+(29, 'Madrigal', 5, 104),
+(30, 'Episodio 1', 1, 105),
+(31, 'Episodio 2', 1, 105),
+(32, 'Semillas', 1, 106),
+(33, 'La feria', 1, 106),
+(34, 'Eureka', 2, 106),
+(35, 'La cuidadora', 3, 106),
+(36, 'Fruta para los cuervos', 4, 106),
+(37, 'Ritos de iniciacion', 1, 107),
+(38, 'Despojados', 1, 107),
+(39, 'El funeral', 1, 107),
+(40, 'El rescate de un rey', 1, 107),
+(41, 'Paris', 3, 107),
+(42, '46 largo', 1, 108),
+(43, 'Universidad', 1, 108),
+(44, 'Un hijo afortunado', 3, 108),
+(45, 'Una segunda opinion', 3, 108),
+(46, 'Los dos Tonys', 5, 108),
+(47, 'Days gone Bye', 1, 109),
+(48, 'Guts', 1, 109),
+(49, 'Secrets', 1, 109),
+(50, 'Seed', 2, 109),
+(51, 'The suicide King', 3, 109),
+(52, 'Crossed', 5, 109),
+(53, 'Conquer', 5, 109),
+(54, 'Go Getters', 7, 109),
+(55, 'Estudio rosa', 1, 110),
+(56, 'El banquero ciego', 1, 110),
+(57, 'La carroza funebre vacia', 2, 110),
+(58, 'El detective mentiroso', 4, 110),
+(59, 'El problema final', 4, 110),
+(60, 'El de la ecografia al final', 1, 111),
+(61, 'El del poker', 1, 111),
+(62, 'El del bebe en el autobus', 2, 111),
+(63, 'El de la varicela', 2, 111),
+(64, 'El de los Kips', 5, 111),
+(65, 'La huida', 1, 112),
+(66, 'Crisis matrimonial', 1, 112),
+(67, 'El reencuentro', 1, 112),
+(68, 'El amor perdurara', 1, 112),
+(69, 'Tabula Rasa', 1, 113),
+(70, 'Hearts and Mind', 1, 113),
+(71, 'Collision', 2, 113),
+(72, 'The long Con', 2, 113),
+(73, '316', 5, 113),
+(74, 'Primera fase completa', 1, 114),
+(75, 'Tabaco y feromonas', 1, 114),
+(76, 'Un saco lleno de corchos', 2, 114),
+(77, 'Si, nomseñor', 2, 114),
+(78, 'Algo salado y redondo', 3, 114),
+(79, 'Suelten a los perros', 4, 114),
+(80, 'Manta Odera, monja', 1, 115),
+(81, 'Emilia Brasil, cocinera', 1, 115),
+(82, 'Margarita, la maldita', 1, 115),
+(83, 'Loenor, la madrastra', 2, 115),
+(84, 'Pilar, esposa', 2, 115),
+(85, 'Claudia, herida', 3, 115),
+(86, 'Milagros, pastora', 3, 115),
+(87, 'Dolores, poseida', 4, 115),
+(88, 'Alicia, deudora', 4, 115);
 
 -- --------------------------------------------------------
 
@@ -294,156 +486,181 @@ INSERT INTO `episodio` (`idepi`, `nombre`, `nrotemporada`, `idprog`) VALUES
 
 CREATE TABLE `escena` (
   `nroescena` int(11) NOT NULL,
-  `idepi` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `duracion` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idepi` int(11) NOT NULL,
+  `duracion` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `escena`
 --
 
 INSERT INTO `escena` (`nroescena`, `idepi`, `duracion`) VALUES
-(100, 'epi01', '35'),
-(101, 'epi02', '37'),
-(102, 'epi03', '35'),
-(103, 'epi04', '35'),
-(104, 'epi05', '21'),
-(105, 'epi06', '35'),
-(106, 'epi07', '35'),
-(107, 'epi08', '24'),
-(108, 'epi09', '22'),
-(109, 'epi10', '35'),
-(110, 'epi11', '35'),
-(111, 'epi12', '37'),
-(112, 'epi13', '40'),
-(113, 'epi14', '35'),
-(114, 'epi15', '21'),
-(115, 'epi16', '55'),
-(116, 'epi17', '35'),
-(117, 'epi18', '41'),
-(118, 'epi19', '20'),
-(119, 'epi20', '35');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `persona`
---
-
-CREATE TABLE `persona` (
-  `idpersona` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `ci` int(11) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `apellido` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `fecha_nac` date DEFAULT NULL,
-  `telefono` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `persona`
---
-
-INSERT INTO `persona` (`idpersona`, `ci`, `nombre`, `apellido`, `fecha_nac`, `telefono`) VALUES
-('act1', 123401, 'Will', 'Smith', '1980-07-07', 2334200),
-('act2', 123402, 'Johnny', 'Depp', '1981-08-17', 2334256),
-('act3', 123403, 'Adam', 'Sandler', '1982-09-27', 2312356),
-('act4', 123404, 'Vin', 'Diesel', '1983-01-13', 2334123),
-('act5', 123405, 'Jackie', 'Chan', '1980-02-04', 2332345),
-('act6', 123406, 'Morgan', 'Freeman', '1981-03-25', 2334556),
-('act7', 123407, 'Brad', 'Pitt', '1982-04-26', 2356756),
-('act8', 123408, 'Angelina', 'Jolie', '1983-05-13', 2389056),
-('act9', 123409, 'Jennifer', 'Aniston', '1984-06-19', 2319056),
-('act10', 123410, 'Jim', 'Carrey', '1986-07-29', 2289056),
-('act11', 123411, 'Sandra', 'Bullock', '1987-08-28', 2309056),
-('act12', 123412, 'Cameron', 'Diaz', '1988-09-27', 2316756),
-('act13', 123413, 'Ben', 'Stiller', '1980-01-26', 2331785),
-('act14', 123414, 'Julia', 'Roberts', '1986-02-25', 2334890),
-('act15', 123415, 'Owen', 'Wilson', '1987-03-24', 2334560),
-('act16', 123416, 'Matt', 'Damon', '1988-04-23', 2334231),
-('act17', 123417, 'Keanu', 'Reeves', '1980-05-22', 2334892),
-('act18', 123418, 'Megan', 'Fox', '1986-06-21', 2334092),
-('act19', 123419, 'Meryl', 'Streep', '1987-07-20', 2334078),
-('act20', 123420, 'Salma', 'Hayek', '1988-08-19', 2334012),
-('asi01', 123421, 'Andrea', 'Lopez', '1981-01-19', 2334012),
-('asi02', 123422, 'Amanda', 'Cortez', '1982-02-19', 2334012),
-('asi03', 123423, 'Ashley', 'Lima', '1983-03-19', 2334012),
-('asi04', 123424, 'Ana', 'Roberts', '1984-04-19', 2334012),
-('asi05', 123425, 'Bianca', 'Lopez', '1985-05-19', 2334012),
-('asi06', 123426, 'Blanca', 'Perez', '1986-06-19', 2334012),
-('asi07', 123427, 'Bruno', 'Lima', '1987-07-19', 2334012),
-('asi08', 123428, 'Carlos', 'Romero', '1988-08-19', 2334012),
-('asi09', 123429, 'Cesar', 'Apaza', '1988-09-19', 2334012),
-('asi10', 123430, 'Cristian', 'Sienna', '1981-10-19', 2334012),
-('asi11', 123431, 'David', 'Stiller', '1982-11-19', 2334012),
-('asi12', 123432, 'Daniel', 'Morales', '1983-12-19', 2334012),
-('asi13', 123433, 'Denis', 'Calcina', '1984-01-19', 2334012),
-('asi14', 123434, 'Ernesto', 'Catari', '1985-02-19', 2334012),
-('asi15', 123435, 'Eugenia', 'Catacora', '1986-03-19', 2334012),
-('asi16', 123436, 'Eva', 'Campos', '1987-04-19', 2334012),
-('asi17', 123437, 'Fernanda', 'Laura', '1988-05-19', 2334012),
-('asi18', 123438, 'Fernando', 'Calani', '1989-06-19', 2334012),
-('asi19', 123439, 'Francisco', 'Cabrera', '1981-07-19', 2334012),
-('asi20', 123440, 'Franco', 'Cachi', '1982-08-19', 2334012),
-('dir01', 123441, 'Sienna', 'Guillory', '1983-09-19', 2334012),
-('dir02', 123442, 'Rebeca', 'Romijn', '1984-10-19', 2334012),
-('dir03', 123443, 'Stella', 'Warren', '1985-11-19', 2334012),
-('dir04', 123444, 'Mike', 'Myers', '1986-12-19', 2334012),
-('dir05', 123445, 'Aishwarya', 'Rai', '1987-01-19', 2334012),
-('dir06', 123446, 'Alicia', 'Silverstone', '1988-02-19', 2334012),
-('dir07', 123447, 'Carmen', 'Electra', '1989-02-19', 2334012),
-('dir08', 123448, 'Cristina', 'Ricci', '1980-03-19', 2334012),
-('dir09', 123449, 'Rosario', 'Dawson', '1981-04-19', 2334012),
-('dir10', 123450, 'Carla', 'Gugino', '1982-05-19', 2334012),
-('dir11', 123451, 'Jessica', 'Bell', '1983-06-19', 2334012),
-('dir12', 123452, 'Amanda', 'Bynes', '1984-07-19', 2334012),
-('dir13', 123453, 'Jane', 'Fonda', '1985-08-19', 2334012),
-('dir14', 123454, 'Winona', 'Ryder', '1986-09-19', 2334012),
-('dir15', 123455, 'Karmen', 'Vega', '1987-10-19', 2334012),
-('dir16', 123456, 'Cinthya', 'Molina', '1988-11-19', 2334012),
-('dir17', 123457, 'Ninfa', 'Moreno', '1989-12-19', 2334012),
-('dir18', 123458, 'Bernardo', 'Soto', '1980-01-19', 2334012),
-('dir19', 123459, 'Alcides', 'Zeballos', '1981-02-19', 2334012),
-('dir20', 123460, 'Ronald', 'Alanoca', '1982-03-19', 2334012),
-('per01', 123461, 'Gabriel', 'Bynes', '1983-04-19', 2334012),
-('per02', 123462, 'Javier', 'Bell', '1984-05-19', 2334012),
-('per03', 123463, 'Jimena', 'Ben', '1985-06-19', 2334012),
-('per04', 123464, 'Karen', 'Cachi', '1986-07-19', 2334012),
-('per05', 123465, 'Kevin', 'Cabrera', '1987-08-19', 2334012),
-('per06', 123466, 'Laura', 'Calani', '1988-09-19', 2334012),
-('per07', 123467, 'Lilian', 'Campos', '1989-10-19', 2334012),
-('per08', 123468, 'Maria', 'Catacora', '1980-11-19', 2334012),
-('per09', 123469, 'Mario', 'Catari', '1981-12-19', 2334012),
-('per10', 123470, 'Oscar', 'Calcina', '1982-01-19', 2334012),
-('per11', 123471, 'Osvaldo', 'Cortez', '1983-02-19', 2334012),
-('per12', 123472, 'Pedro', 'Dawson', '1984-03-19', 2334012),
-('per13', 123473, 'Pablo', 'Damon', '1985-04-19', 2334012),
-('per14', 123474, 'Ramiro', 'Diaz', '1986-05-19', 2334012),
-('per15', 123475, 'Reina', 'Depp', '1987-06-19', 2334012),
-('per16', 123476, 'Rebeca', 'Fonda', '1988-07-19', 2334012),
-('per17', 123477, 'Sandra', 'Freeman', '1980-08-19', 2334012),
-('per18', 123478, 'Sandro', 'Guillory', '1981-09-19', 2334012),
-('per19', 123479, 'Sergio', 'Hayek', '1982-10-19', 2334012),
-('per20', 123480, 'Teodoro', 'Keanu', '1983-11-19', 2334012),
-('tec01', 123481, 'Tina', 'Lima', '1984-12-19', 2334012),
-('tec02', 123482, 'Waldo', 'Lopez', '1985-01-19', 2334012),
-('tec03', 123483, 'Wendy', 'Moreno', '1986-02-19', 2334012),
-('tec04', 123484, 'Milton', 'Myers', '1987-03-19', 2334012),
-('tec05', 123485, 'Manuel', 'Molina', '1988-04-19', 2334012),
-('tec06', 123486, 'Paola', 'Morales', '1989-05-19', 2334012),
-('tec07', 123487, 'Maria', 'Owen', '1980-06-19', 2334012),
-('tec08', 123488, 'Magadalena', 'Perez', '1981-07-19', 2334012),
-('tec09', 123489, 'Mery', 'Paredes', '1982-08-19', 2334012),
-('tec10', 123490, 'Antonio', 'Roberts', '1983-09-19', 2334012),
-('tec11', 123491, 'Rodolfo', 'Ryder', '1984-10-19', 2334012),
-('tec12', 123492, 'Lurdes', 'Ricci', '1985-11-19', 2334012),
-('tec13', 123493, 'Raquel', 'Soto', '1986-12-19', 2334012),
-('tec14', 123494, 'Silvia', 'Stiller', '1987-01-19', 2334012),
-('tec15', 123495, 'Dante', 'Streep', '1988-02-19', 2334012),
-('tec16', 123496, 'Dennis', 'Vega', '1989-03-19', 2334012),
-('tec17', 123497, 'Deysi', 'Tori', '1980-04-19', 2334012),
-('tec18', 123498, 'Marina', 'Casas', '1981-05-19', 2334012),
-('tec19', 123499, 'Ruben', 'Lima', '1982-06-19', 2334022),
-('tec20', 123500, 'Eddy', 'Lima', '1983-08-19', 2334010);
+(1, 1, '20 minutos'),
+(1, 2, '20 minutos'),
+(1, 3, '20 minutos'),
+(1, 4, '20 minutos'),
+(1, 5, '20 minutos'),
+(1, 6, '20 minutos'),
+(1, 7, '20 minutos'),
+(1, 8, '20 minutos'),
+(1, 9, '20 minutos'),
+(1, 10, '20 minutos'),
+(1, 11, '20 minutos'),
+(1, 12, '20 minutos'),
+(1, 13, '20 minutos'),
+(1, 14, '20 minutos'),
+(1, 15, '20 minutos'),
+(1, 16, '20 minutos'),
+(1, 17, '20 minutos'),
+(1, 18, '20 minutos'),
+(1, 19, '20 minutos'),
+(1, 20, '20 minutos'),
+(1, 21, '20 minutos'),
+(1, 22, '20 minutos'),
+(1, 23, '22 minutos'),
+(1, 24, '20 minutos'),
+(1, 25, '22 minutos'),
+(1, 26, '22 minutos'),
+(1, 27, '22 minutos'),
+(1, 28, '22 minutos'),
+(1, 29, '22 minutos'),
+(1, 30, '25 minutos'),
+(1, 31, '25 minutos'),
+(1, 32, '15 minutos'),
+(1, 33, '15 minutos'),
+(1, 34, '15 minutos'),
+(1, 35, '15 minutos'),
+(1, 36, '15 minutos'),
+(1, 37, '22 minutos'),
+(1, 38, '22 minutos'),
+(1, 39, '22 minutos'),
+(1, 40, '22 minutos'),
+(1, 41, '22 minutos'),
+(1, 47, '15 minutos'),
+(1, 48, '15 minutos'),
+(1, 49, '15 minutos'),
+(1, 50, '15 minutos'),
+(1, 51, '15 minutos'),
+(1, 52, '15 minutos'),
+(1, 53, '15 minutos'),
+(1, 54, '15 minutos'),
+(1, 55, '20 minutos'),
+(1, 56, '20 minutos'),
+(1, 57, '20 minutos'),
+(1, 58, '20 minutos'),
+(1, 59, '20 minutos'),
+(1, 60, '15 minutos'),
+(1, 61, '15 minutos'),
+(1, 62, '15 minutos'),
+(1, 63, '15 minutos'),
+(1, 64, '15 minutos'),
+(1, 65, '20 minutos'),
+(1, 66, '20 minutos'),
+(1, 67, '20 minutos'),
+(1, 68, '20 minutos'),
+(1, 69, '22 minutos'),
+(1, 70, '22 minutos'),
+(1, 71, '22 minutos'),
+(1, 72, '22 minutos'),
+(1, 73, '22 minutos'),
+(1, 74, '25 minutos'),
+(1, 75, '25 minutos'),
+(1, 76, '25 minutos'),
+(1, 77, '25 minutos'),
+(1, 78, '25 minutos'),
+(1, 79, '25 minutos'),
+(1, 80, '15 minutos'),
+(1, 81, '15 minutos'),
+(1, 82, '15 minutos'),
+(1, 83, '15 minutos'),
+(1, 84, '15 minutos'),
+(1, 85, '15 minutos'),
+(1, 86, '15 minutos'),
+(1, 87, '15 minutos'),
+(1, 88, '15 minutos'),
+(2, 1, '25 minutos'),
+(2, 2, '25 minutos'),
+(2, 3, '25 minutos'),
+(2, 4, '25 minutos'),
+(2, 5, '25 minutos'),
+(2, 6, '25 minutos'),
+(2, 7, '25 minutos'),
+(2, 8, '25 minutos'),
+(2, 9, '25 minutos'),
+(2, 10, '22 minutos'),
+(2, 11, '22 minutos'),
+(2, 12, '22 minutos'),
+(2, 13, '22 minutos'),
+(2, 14, '22 minutos'),
+(2, 15, '22 minutos'),
+(2, 16, '22 minutos'),
+(2, 17, '22 minutos'),
+(2, 18, '22 minutos'),
+(2, 19, '22 minutos'),
+(2, 20, '22 minutos'),
+(2, 21, '22 minutos'),
+(2, 22, '20 minutos'),
+(2, 23, '22 minutos'),
+(2, 24, '22 minutos'),
+(2, 25, '25 minutos'),
+(2, 26, '25 minutos'),
+(2, 27, '25 minutos'),
+(2, 28, '25 minutos'),
+(2, 29, '25 minutos'),
+(2, 30, '20 minutos'),
+(2, 31, '20 minutos'),
+(2, 32, '15 minutos'),
+(2, 33, '15 minutos'),
+(2, 34, '15 minutos'),
+(2, 35, '15 minutos'),
+(2, 36, '15 minutos'),
+(2, 37, '20 minutos'),
+(2, 38, '20 minutos'),
+(2, 39, '20 minutos'),
+(2, 40, '20 minutos'),
+(2, 41, '20 minutos'),
+(2, 47, '15 minutos'),
+(2, 48, '15 minutos'),
+(2, 49, '15 minutos'),
+(2, 50, '15 minutos'),
+(2, 51, '15 minutos'),
+(2, 52, '15 minutos'),
+(2, 53, '15 minutos'),
+(2, 54, '15 minutos'),
+(2, 55, '20 minutos'),
+(2, 56, '20 minutos'),
+(2, 57, '20 minutos'),
+(2, 58, '20 minutos'),
+(2, 59, '20 minutos'),
+(2, 60, '20 minutos'),
+(2, 61, '20 minutos'),
+(2, 62, '20 minutos'),
+(2, 63, '20 minutos'),
+(2, 64, '20 minutos'),
+(2, 65, '20 minutos'),
+(2, 66, '20 minutos'),
+(2, 67, '20 minutos'),
+(2, 68, '20 minutos'),
+(2, 69, '21 minutos'),
+(2, 70, '21 minutos'),
+(2, 71, '21 minutos'),
+(2, 72, '21 minutos'),
+(2, 73, '21 minutos'),
+(2, 74, '20 minutos'),
+(2, 75, '20 minutos'),
+(2, 76, '20 minutos'),
+(2, 77, '20 minutos'),
+(2, 78, '20 minutos'),
+(2, 79, '20 minutos'),
+(2, 80, '25 minutos'),
+(2, 81, '25 minutos'),
+(2, 82, '25 minutos'),
+(2, 83, '25 minutos'),
+(2, 84, '25 minutos'),
+(2, 85, '25 minutos'),
+(2, 86, '25 minutos'),
+(2, 87, '25 minutos'),
+(2, 88, '25 minutos');
 
 -- --------------------------------------------------------
 
@@ -452,36 +669,93 @@ INSERT INTO `persona` (`idpersona`, `ci`, `nombre`, `apellido`, `fecha_nac`, `te
 --
 
 CREATE TABLE `personalproduccion` (
-  `idper` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `turno` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `idper` int(11) NOT NULL,
+  `turno` text,
   `sueldo` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `personalproduccion`
 --
 
 INSERT INTO `personalproduccion` (`idper`, `turno`, `sueldo`) VALUES
-('per01', 'mañana', 2500),
-('per02', 'tarde', 2500),
-('per03', 'tarde', 2500),
-('per04', 'mañana', 2500),
-('per05', 'mañana', 2500),
-('per06', 'tarde', 2500),
-('per07', 'mañana', 2500),
-('per08', 'tarde', 2500),
-('per09', 'mañana', 2500),
-('per10', 'tarde', 2500),
-('per11', 'mañana', 2500),
-('per12', 'tarde', 2500),
-('per13', 'tarde', 2500),
-('per14', 'mañana', 2500),
-('per15', 'mañana', 2500),
-('per16', 'tarde', 2500),
-('per17', 'mañana', 2500),
-('per18', 'tarde', 2500),
-('per19', 'mañana', 2500),
-('per20', 'tarde', 2500);
+(2, 'Mañana', 3562),
+(4, 'Mañana', 5600),
+(5, 'Tarde', 5200),
+(6, 'Noche', 4000),
+(7, 'Mañana', 4350),
+(8, 'Noche', 3000),
+(9, 'Mañana', 3875),
+(11, 'Tarde', 6500),
+(12, 'Tarde', 7852),
+(13, 'Noche', 6350),
+(14, 'Mañana', 3254),
+(17, 'Mañana', 3875),
+(18, 'Noche', 4987),
+(20, 'Mañana', 5000),
+(21, 'Mañana', 6320),
+(22, 'Noche', 9620),
+(23, 'Tarde', 2000),
+(24, 'Mañana', 6300),
+(26, 'Tarde', 8799),
+(28, 'Mañana', 7400),
+(31, 'Noche', 7100),
+(32, 'Tarde', 7001),
+(33, 'Mañana', 6542),
+(35, 'Noche', 6320),
+(36, 'Mañana', 6020),
+(37, 'Tarde', 3800),
+(38, 'Noche', 3920),
+(40, 'Mañana', 3814),
+(42, 'Mañana', 4536),
+(44, 'Tarde', 4862),
+(45, 'Noche', 4721),
+(47, 'Mañana', 4500),
+(49, 'Noche', 3500),
+(50, 'Mañana', 3900),
+(51, 'Tarde', 3714),
+(53, 'Tarde', 5236),
+(54, 'Noche', 4630),
+(55, 'Mañana', 4920),
+(57, 'Mañana', 5600),
+(59, 'Tarde', 8562),
+(65, 'Noche', 7400),
+(67, 'Mañana', 4590),
+(69, 'Mañana', 3000),
+(73, 'Tarde', 3578),
+(74, 'Tarde', 3700),
+(75, 'Mañana', 5400),
+(77, 'Noche', 5900),
+(81, 'Mañana', 5630),
+(82, 'Tarde', 4100),
+(85, 'Noche', 4920),
+(86, 'Mañana', 3600),
+(87, 'Mañana', 3825),
+(94, 'Tarde', 3120),
+(99, 'Noche', 3913),
+(101, 'Mañana', 7420),
+(104, 'Tarde', 8520),
+(105, 'Mañana', 7520),
+(106, 'Tarde', 4520),
+(107, 'Noche', 6000),
+(108, 'Mañana', 7000),
+(109, 'Noche', 5020),
+(110, 'Tarde', 5420),
+(111, 'Mañana', 3020),
+(112, 'Noche', 2999),
+(113, 'Noche', 3650),
+(114, 'Tarde', 6530),
+(115, 'Tarde', 7012),
+(116, 'Mañana', 4563),
+(117, 'Tarde', 3654),
+(118, 'Noche', 4789),
+(119, 'Mañana', 5200),
+(120, 'Tarde', 4600),
+(121, 'Tarde', 6300),
+(122, 'Mañana', 8000),
+(123, 'Noche', 8010),
+(124, 'Noche', 4520),
+(125, 'Tarde', 5200);
 
 -- --------------------------------------------------------
 
@@ -490,35 +764,56 @@ INSERT INTO `personalproduccion` (`idper`, `turno`, `sueldo`) VALUES
 --
 
 CREATE TABLE `posee` (
-  `idprog` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `idactor` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idprog` int(11) NOT NULL,
+  `idactor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `posee`
 --
 
 INSERT INTO `posee` (`idprog`, `idactor`) VALUES
-('pro01', 'act1'),
-('pro02', 'act2'),
-('pro03', 'act3'),
-('pro04', 'act4'),
-('pro05', 'act5'),
-('pro06', 'act6'),
-('pro07', 'act7'),
-('pro08', 'act8'),
-('pro09', 'act9'),
-('pro10', 'act10'),
-('pro11', 'act11'),
-('pro12', 'act12'),
-('pro13', 'act13'),
-('pro14', 'act14'),
-('pro15', 'act15'),
-('pro16', 'act16'),
-('pro17', 'act17'),
-('pro18', 'act18'),
-('pro19', 'act19'),
-('pro20', 'act20');
+(101, 1),
+(101, 3),
+(101, 10),
+(101, 15),
+(101, 16),
+(101, 19),
+(101, 25),
+(101, 29),
+(101, 30),
+(101, 34),
+(102, 39),
+(102, 41),
+(102, 43),
+(102, 46),
+(102, 48),
+(103, 52),
+(103, 56),
+(103, 58),
+(103, 60),
+(103, 61),
+(103, 62),
+(103, 63),
+(103, 66),
+(104, 68),
+(104, 70),
+(104, 72),
+(104, 76),
+(104, 78),
+(104, 80),
+(105, 84),
+(105, 89),
+(105, 90),
+(105, 91),
+(105, 92),
+(106, 93),
+(107, 95),
+(108, 96),
+(109, 97),
+(110, 98),
+(111, 100),
+(112, 102);
 
 -- --------------------------------------------------------
 
@@ -527,38 +822,33 @@ INSERT INTO `posee` (`idprog`, `idactor`) VALUES
 --
 
 CREATE TABLE `programa` (
-  `idprog` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `nombre` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `genero` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `idprog` int(11) NOT NULL,
+  `nombre` text,
+  `genero` text,
   `nrotemporadas` int(11) DEFAULT NULL,
-  `pais` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `pais` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `programa`
 --
 
 INSERT INTO `programa` (`idprog`, `nombre`, `genero`, `nrotemporadas`, `pais`) VALUES
-('pro01', 'friends', 'drama', 7, 'EEUU'),
-('pro02', 'como conoci a tu madre', 'drama', 7, 'EEUU'),
-('pro03', 'la casa de papel', 'drama', 3, 'España'),
-('pro04', 'las chicas gildmore', 'drama', 7, 'EEUU'),
-('pro05', 'flash', 'accion', 5, 'EEUU'),
-('pro06', 'la casa de las flores', 'drama', 2, 'Mexico'),
-('pro07', 'atypical', 'drama', 3, 'EEUU'),
-('pro08', 'supergirl', 'accion', 4, 'EEUU'),
-('pro09', 'riverdale', 'drama', 3, 'EEUU'),
-('pro10', 'elite', 'drama', 3, 'EEUU'),
-('pro11', 'Victorius', 'comedia', 7, 'EEUU'),
-('pro12', 'Sam y Cat', 'comedia', 7, 'EEUU'),
-('pro13', 'Soy Luna', 'drama', 3, 'Argentina'),
-('pro14', 'The end of fucking world', 'drama', 2, 'EEUU'),
-('pro15', 'Rick y Morty', 'entretenimiento', 4, 'EEUU'),
-('pro16', 'Gravity Falls', 'entretenimiento', 5, 'EEUU'),
-('pro17', 'Greys Anatomy', 'drama', 15, 'EEUU'),
-('pro18', 'Lucifer', 'accion', 4, 'EEUU'),
-('pro19', 'I Carly', 'comedia', 10, 'EEUU'),
-('pro20', 'Drake y Josh', 'comedia', 10, 'EEUU');
+(101, 'The big bang theory', 'Comedia', 12, 'EEUU'),
+(102, 'El chavo del 8', 'Comedia', 8, 'Mexico'),
+(103, 'Glee', 'Comedia-Musical', 6, 'EEUU'),
+(104, 'Breaking Bad', 'Drama', 5, 'EEUU'),
+(105, 'El Capo', 'Telenovela', 3, 'Colombia'),
+(106, 'Hijos de la anarquia', 'Drama-Crimen', 7, 'EEUU'),
+(107, 'Vikingos', 'Aventura-Drama', 5, 'Canada'),
+(108, 'Los Soprano', 'Drama', 6, 'EEUU'),
+(109, 'The walking Dead', 'Drama-Terror', 9, 'EEUU'),
+(110, 'Sherlock', 'Aventura-Drama', 4, 'Reino Unido'),
+(111, 'Friends', 'comedia', 10, 'EEUU'),
+(112, 'Hermanos', 'Drama-Guerra', 1, 'Espania'),
+(113, 'Lost', 'Drama-Ciencia Ficcion', 6, 'EEUU'),
+(114, 'Dos hombres y medio', 'comedia', 12, 'EEUU'),
+(115, 'Mujeres Asesinas', 'Telenovela', 4, 'Argentina');
 
 -- --------------------------------------------------------
 
@@ -567,35 +857,30 @@ INSERT INTO `programa` (`idprog`, `nombre`, `genero`, `nrotemporadas`, `pais`) V
 --
 
 CREATE TABLE `se_realiza` (
-  `idambiente` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `idprog` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idambiente` int(11) NOT NULL,
+  `idprog` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `se_realiza`
 --
 
 INSERT INTO `se_realiza` (`idambiente`, `idprog`) VALUES
-('amb100', 'pro01'),
-('amb200', 'pro02'),
-('amb300', 'pro03'),
-('amb400', 'pro04'),
-('amb500', 'pro05'),
-('amb600', 'pro06'),
-('amb700', 'pro07'),
-('amb800', 'pro08'),
-('amb900', 'pro09'),
-('amb110', 'pro10'),
-('amb120', 'pro11'),
-('amb130', 'pro12'),
-('amb140', 'pro13'),
-('amb150', 'pro14'),
-('amb160', 'pro15'),
-('amb170', 'pro16'),
-('amb180', 'pro17'),
-('amb190', 'pro18'),
-('amb200', 'pro19'),
-('amb210', 'pro20');
+(301, 101),
+(302, 102),
+(303, 103),
+(304, 104),
+(305, 105),
+(306, 106),
+(307, 107),
+(308, 108),
+(309, 109),
+(310, 110),
+(311, 111),
+(312, 112),
+(313, 113),
+(314, 114),
+(315, 115);
 
 -- --------------------------------------------------------
 
@@ -604,37 +889,104 @@ INSERT INTO `se_realiza` (`idambiente`, `idprog`) VALUES
 --
 
 CREATE TABLE `se_transmite` (
-  `idcanal` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `idepi` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hora_ini` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `hora_fin` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idcanal` int(11) NOT NULL,
+  `idepi` int(11) NOT NULL,
+  `hora_ini` text,
+  `hora_fin` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `se_transmite`
 --
 
 INSERT INTO `se_transmite` (`idcanal`, `idepi`, `hora_ini`, `hora_fin`) VALUES
-('can01', 'epi01', '05:00', '06:00'),
-('can02', 'epi02', '18:00', '19:00'),
-('can03', 'epi03', '20:00', '21:00'),
-('can04', 'epi04', '08:00', '09:00'),
-('can05', 'epi05', '10:00', '11:00'),
-('can06', 'epi06', '05:00', '06:00'),
-('can07', 'epi07', '14:00', '15:00'),
-('can08', 'epi08', '19:00', '20:00'),
-('can09', 'epi09', '12:00', '13:00'),
-('can10', 'epi10', '23:00', '00:00'),
-('can11', 'epi11', '05:00', '06:00'),
-('can12', 'epi12', '18:00', '19:00'),
-('can13', 'epi13', '20:00', '21:00'),
-('can14', 'epi14', '08:00', '09:00'),
-('can15', 'epi15', '10:00', '11:00'),
-('can16', 'epi16', '05:00', '06:00'),
-('can17', 'epi17', '14:00', '15:00'),
-('can18', 'epi18', '19:00', '20:00'),
-('can19', 'epi19', '12:00', '13:00'),
-('can20', 'epi20', '23:00', '00:00');
+(201, 1, '14:00', '15:00'),
+(201, 2, '15:00', '16:00'),
+(201, 3, '16:00', '17:00'),
+(201, 4, '17:00', '18:00'),
+(201, 5, '18:00', '19:00'),
+(201, 6, '19:00', '20:00'),
+(201, 7, '20:00', '21:00'),
+(201, 8, '21:00', '22:00'),
+(201, 9, '22:00', '23:00'),
+(201, 10, '23:00', '00:00'),
+(201, 11, '00:00', '1:00'),
+(202, 12, '14:00', '15:00'),
+(202, 14, '15:00', '16:00'),
+(202, 15, '16:00', '17:00'),
+(202, 16, '17:00', '18:00'),
+(202, 17, '18:00', '19:00'),
+(202, 18, '19:00', '20:00'),
+(202, 19, '20:00', '21:00'),
+(202, 20, '21:00', '22:00'),
+(202, 21, '22:00', '23:00'),
+(202, 22, '23:00', '00:00'),
+(202, 23, '00:00', '1:00'),
+(203, 24, '14:00', '15:00'),
+(203, 25, '15:00', '16:00'),
+(203, 26, '16:00', '17:00'),
+(203, 27, '17:00', '18:00'),
+(204, 28, '14:00', '15:00'),
+(204, 29, '15:00', '16:00'),
+(204, 30, '16:00', '17:00'),
+(204, 31, '17:00', '18:00'),
+(205, 32, '14:00', '15:00'),
+(205, 33, '15:00', '16:00'),
+(205, 34, '16:00', '17:00'),
+(205, 35, '17:00', '18:00'),
+(206, 36, '21:00', '22:00'),
+(206, 37, '22:00', '23:00'),
+(206, 38, '23:00', '00:00'),
+(206, 39, '00:00', '1:00'),
+(207, 40, '18:00', '19:00'),
+(207, 41, '19:00', '20:00'),
+(207, 42, '20:00', '21:00'),
+(207, 43, '21:00', '22:00'),
+(208, 44, '18:00', '19:00'),
+(208, 45, '19:00', '20:00'),
+(208, 46, '20:00', '21:00'),
+(208, 47, '21:00', '22:00'),
+(209, 48, '18:00', '19:00'),
+(209, 49, '19:00', '20:00'),
+(209, 50, '20:00', '21:00'),
+(209, 51, '21:00', '22:00'),
+(210, 52, '16:00', '17:00'),
+(210, 53, '17:00', '18:00'),
+(210, 54, '18:00', '19:00'),
+(210, 55, '19:00', '20:00'),
+(211, 56, '16:00', '17:00'),
+(211, 57, '17:00', '18:00'),
+(211, 58, '18:00', '19:00'),
+(211, 59, '19:00', '20:00'),
+(212, 60, '16:00', '17:00'),
+(212, 61, '17:00', '18:00'),
+(212, 62, '18:00', '19:00'),
+(212, 63, '19:00', '20:00'),
+(213, 64, '18:00', '19:00'),
+(213, 65, '19:00', '20:00'),
+(213, 66, '20:00', '21:00'),
+(214, 67, '16:00', '17:00'),
+(214, 68, '17:00', '18:00'),
+(214, 69, '18:00', '19:00'),
+(215, 70, '16:00', '17:00'),
+(215, 71, '17:00', '18:00'),
+(215, 72, '18:00', '19:00'),
+(216, 73, '16:00', '17:00'),
+(216, 74, '17:00', '18:00'),
+(216, 75, '18:00', '19:00'),
+(217, 76, '16:00', '17:00'),
+(217, 77, '17:00', '18:00'),
+(217, 78, '18:00', '19:00'),
+(218, 79, '16:00', '17:00'),
+(218, 80, '17:00', '18:00'),
+(218, 81, '18:00', '19:00'),
+(219, 82, '16:00', '17:00'),
+(219, 83, '17:00', '18:00'),
+(219, 84, '18:00', '19:00'),
+(219, 85, '20:00', '21:00'),
+(219, 86, '21:00', '22:00'),
+(219, 87, '22:00', '23:00'),
+(219, 88, '23:00', '00:00');
 
 -- --------------------------------------------------------
 
@@ -643,35 +995,63 @@ INSERT INTO `se_transmite` (`idcanal`, `idepi`, `hora_ini`, `hora_fin`) VALUES
 --
 
 CREATE TABLE `tecnico` (
-  `idtec` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
-  `mat_trabajo` varchar(150) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+  `idtec` int(11) NOT NULL,
+  `mat_trabajo` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tecnico`
 --
 
 INSERT INTO `tecnico` (`idtec`, `mat_trabajo`) VALUES
-('tec01', 'iluminacion'),
-('tec02', 'vestuario'),
-('tec03', 'decoracion'),
-('tec04', 'color'),
-('tec05', 'sonido'),
-('tec06', 'musica'),
-('tec07', 'iluminacion'),
-('tec08', 'vestuario'),
-('tec09', 'decoracion'),
-('tec10', 'color'),
-('tec11', 'iluminacion'),
-('tec12', 'vestuario'),
-('tec13', 'decoracion'),
-('tec14', 'color'),
-('tec15', 'sonido'),
-('tec16', 'musica'),
-('tec17', 'iluminacion'),
-('tec18', 'vestuario'),
-('tec19', 'decoracion'),
-('tec20', 'color');
+(4, 'guion'),
+(5, 'maquinaria'),
+(8, 'operario'),
+(9, 'escenografia'),
+(11, 'maquinaria'),
+(17, 'operario'),
+(18, 'operario'),
+(20, 'electricista'),
+(22, 'maquinaria'),
+(24, 'maquinaria'),
+(26, 'operario'),
+(28, 'electricista'),
+(31, 'maquinaria'),
+(33, 'escenografia'),
+(35, 'operario'),
+(36, 'operario'),
+(37, 'guion'),
+(38, 'maquinaria'),
+(42, 'guion'),
+(44, 'electricista'),
+(47, 'operario'),
+(49, 'maquinaria'),
+(50, 'escenografia'),
+(53, 'escenografia'),
+(54, 'maquinaria'),
+(55, 'operario'),
+(57, 'Electricista'),
+(59, 'guion'),
+(65, 'maquinaria'),
+(73, 'operario'),
+(74, 'escenografia'),
+(75, 'operario'),
+(77, 'maquinaria'),
+(81, 'operario'),
+(86, 'guion'),
+(94, 'electricista'),
+(99, 'maquinaria'),
+(104, 'electricista'),
+(105, 'operario'),
+(106, 'escenografia'),
+(107, 'operario'),
+(108, 'electricista'),
+(109, 'operario'),
+(110, 'operario'),
+(111, 'electricista'),
+(112, 'operario'),
+(113, 'maquinaria'),
+(114, 'escenografia');
 
 --
 -- Índices para tablas volcadas
@@ -702,6 +1082,12 @@ ALTER TABLE `canal`
   ADD PRIMARY KEY (`idcanal`);
 
 --
+-- Indices de la tabla `cuenta`
+--
+ALTER TABLE `cuenta`
+  ADD PRIMARY KEY (`idprog`,`idper`);
+
+--
 -- Indices de la tabla `director`
 --
 ALTER TABLE `director`
@@ -712,20 +1098,13 @@ ALTER TABLE `director`
 --
 ALTER TABLE `episodio`
   ADD PRIMARY KEY (`idepi`),
-  ADD KEY `idprog` (`idprog`);
+  ADD KEY `idProg` (`idProg`);
 
 --
 -- Indices de la tabla `escena`
 --
 ALTER TABLE `escena`
-  ADD PRIMARY KEY (`nroescena`),
-  ADD KEY `idepi` (`idepi`);
-
---
--- Indices de la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD PRIMARY KEY (`ci`);
+  ADD PRIMARY KEY (`nroescena`,`idepi`);
 
 --
 -- Indices de la tabla `personalproduccion`
@@ -734,10 +1113,28 @@ ALTER TABLE `personalproduccion`
   ADD PRIMARY KEY (`idper`);
 
 --
+-- Indices de la tabla `posee`
+--
+ALTER TABLE `posee`
+  ADD PRIMARY KEY (`idprog`,`idactor`);
+
+--
 -- Indices de la tabla `programa`
 --
 ALTER TABLE `programa`
   ADD PRIMARY KEY (`idprog`);
+
+--
+-- Indices de la tabla `se_realiza`
+--
+ALTER TABLE `se_realiza`
+  ADD PRIMARY KEY (`idambiente`,`idprog`);
+
+--
+-- Indices de la tabla `se_transmite`
+--
+ALTER TABLE `se_transmite`
+  ADD PRIMARY KEY (`idcanal`,`idepi`);
 
 --
 -- Indices de la tabla `tecnico`
@@ -753,13 +1150,7 @@ ALTER TABLE `tecnico`
 -- Filtros para la tabla `episodio`
 --
 ALTER TABLE `episodio`
-  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`idprog`) REFERENCES `programa` (`idprog`);
-
---
--- Filtros para la tabla `escena`
---
-ALTER TABLE `escena`
-  ADD CONSTRAINT `escena_ibfk_1` FOREIGN KEY (`idepi`) REFERENCES `episodio` (`idepi`);
+  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`idProg`) REFERENCES `programa` (`idProg`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

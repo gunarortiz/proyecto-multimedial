@@ -90,7 +90,7 @@ $resp = mysqli_query($conexion, $query);
                 $respd = mysqli_query($conexion, $queryd);
 
                 while ($rowd = mysqli_fetch_array($respd)) {
-                    echo $rowd['duracion'] . ',';
+                    echo substr($rowd['duracion'],0,2) . ',';
                 }
                 echo ']},{';
             }

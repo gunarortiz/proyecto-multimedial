@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -9,7 +9,7 @@ function Header()
     // Logo
     $link = $this->AddLink();
     $this->SetLink($link);
-    $this->Image('imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
+    $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
 }
 
 // Pie de página
@@ -23,7 +23,7 @@ function Footer()
     $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
-include('base_datos/bd.php');
+include('../base_datos/bd.php');
 $consulta = "SELECT p.ci, p.nombre, p.apellido, p.fecha_nac, p.telefono FROM tecnico t, persona p 
 WHERE (t.mat_trabajo LIKE 'iluminacion') AND (t.idtec LIKE p.idpersona)";
 $resultado = $conexion->query($consulta);

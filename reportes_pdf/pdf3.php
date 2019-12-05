@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -9,7 +9,7 @@ function Header()
     // Logo
     $link = $this->AddLink();
     $this->SetLink($link);
-    $this->Image('imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
+    $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
 }
 
 // Pie de página
@@ -23,7 +23,7 @@ function Footer()
     $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
-include('base_datos/bd.php');
+include('../base_datos/bd.php');
 $consulta = "SELECT p.idprog, p.nombre, a.tipo
 FROM programa p, ambiente a, se_realiza s
 WHERE (s.idambiente LIKE a.idambiente) and (p.idprog LIKE s.idprog)";

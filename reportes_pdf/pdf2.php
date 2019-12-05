@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -9,7 +9,7 @@ function Header()
     // Logo
     $link = $this->AddLink();
     $this->SetLink($link);
-    $this->Image('imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
+    $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
 }
 
 // Pie de página
@@ -23,7 +23,7 @@ function Footer()
     $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
-include('base_datos/bd.php');
+include('../base_datos/bd.php');
 $consulta = "SELECT *
 FROM programa p, episodio e, escena es
 WHERE (p.idprog LIKE 'pro07') AND (e.idprog LIKE 'pro07') AND (e.idepi LIKE es.idepi)";

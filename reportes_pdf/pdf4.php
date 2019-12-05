@@ -9,7 +9,7 @@ function Header()
     // Logo
     $link = $this->AddLink();
     $this->SetLink($link);
-    $this->Image('imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
+    $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
 }
 
 // Pie de página

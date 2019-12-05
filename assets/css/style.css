@@ -19,6 +19,35 @@ Googel Fonts  */
 
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+
+.contenedor {
+  overflow-y: auto;
+  padding-bottom: 63px !important;
+}
+.altura-100{
+  height: 100%;
+}
+html, body{
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.card.card-body{
+  padding: 20px !important;
+  margin-top: 20px;
+}
+
+.contenedor {
+  overflow-y: auto;
+}
+.altura-100{
+  height: 100%;
+}
+html, body{
+  height: 100%;
+  overflow-y: hidden;
+}
+
 .bg-flat-color-1 {
   background: #00c292; }
 
@@ -346,7 +375,6 @@ Googel Fonts  */
   transition: all 0.3s ease; }
 
 body {
-  display: table;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   width: 100%; }
@@ -566,7 +594,7 @@ aside.left-panel {
   width: 280px;
   -webkit-box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
           box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-  position: fixed;
+  position: initial;
   left: 0;
   bottom: 0;
   top: 55px;
@@ -2417,6 +2445,14 @@ footer.site-footer {
         -ms-flex: none;
             flex: none; } }
 @media (max-width: 768px) {
+  .contenedor {
+    overflow-y: initial;
+  }
+  html, body{
+    height: 100%;
+    overflow-y: scroll;
+  }
+  
   .navbar {
     height: 100vh; }
     .navbar .navbar-nav li.menu-item-has-children > a:before {
@@ -2458,6 +2494,7 @@ footer.site-footer {
     margin-left: 0; }
 
   #left-panel {
+    position: fixed;
     max-width: 100%;
     width: 100%; }
     #left-panel .navbar .navbar-nav li > a {

@@ -23,6 +23,11 @@
 
 <body>
     <?php
-    include('menu.php');
     include('nav.php');
     ?>
+
+<div class="d-flex altura-100">
+    <?php
+    include('menu.php');
+    ?>
+    

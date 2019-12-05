@@ -1,4 +1,5 @@
-<aside id="left-panel" class="left-panel">
+
+<aside id="left-panel" class="left-panel" style="top: 56px; -webkit-box-shadow: 1px 16px 20px rgba(0, 0, 0, 0.08);box-shadow: 1px 16px 20px rgba(0, 0, 0, 0.08);">
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -7,7 +8,11 @@
                 </li>
                 <li class="menu-title">Reportes</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Actor</a>
+                    <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Reportes en PDF</a>
+                    
+                </li>
+                <li class="">
+                    <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o "></i>Graficos</a>
                     
                 </li>
                 <li class="menu-title">ABM</li><!-- /.menu-title -->

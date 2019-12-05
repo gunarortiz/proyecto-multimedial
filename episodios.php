@@ -1,4 +1,4 @@
-<?php include("base_datos/bd.php")?>
+<?php include('session.php');?>
 
 <?php include("partes/header.php")?>
 <div class="container contenedor p-4">
@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nro Temporada</th>
+                            <th>Nro Temp</th>
                             <th>Nombre</th>
                             <th>Id Programa</th>
                             <th>Acción</th>

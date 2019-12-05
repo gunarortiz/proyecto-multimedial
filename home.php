@@ -1,6 +1,5 @@
 <?php
-include('base_datos/session.php');
-include('base_datos/bd.php');
+include('session.php');
 include('partes/header.php')
 ?>
 <div class="container text-center p-3">

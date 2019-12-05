@@ -1,5 +1,5 @@
 <?php
-include('base_datos/bd.php');
+include('session.php');
 include('partes/header.php')
 ?>
 <div class="container p-3">

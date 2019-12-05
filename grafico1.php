@@ -1,6 +1,7 @@
 <?php
-include('partes/header.php');
 include('session.php');
+
+include('partes/header.php');
 
 
 $query = "SELECT turno, COUNT(*) as cantidad FROM personalproduccion group by turno";

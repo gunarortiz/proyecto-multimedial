@@ -10,6 +10,18 @@ function Header()
     $link = $this->AddLink();
     $this->SetLink($link);
     $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
+        // Arial bold 15
+        $pdf->SetFont('Arial','B',15);
+        // Movernos a la derecha
+        $pdf->Cell(80);
+        // Título
+        $pdf->Cell(50,10,'NOMINA',0,0,'C');
+        // Salto de línea
+        $pdf->Ln(10);
+        $pdf->Cell(80);
+        // Título1
+        $pdf->Cell(50,10,'- SUELDO PERSONAL PRODUCCION -',0,0,'C');
+        $pdf->Ln(30);
 }
 
 // Pie de página
@@ -34,19 +46,6 @@ $resultado = $conexion->query($consulta);
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-
-    // Arial bold 15
-    $pdf->SetFont('Arial','B',15);
-    // Movernos a la derecha
-    $pdf->Cell(80);
-    // Título
-    $pdf->Cell(50,10,'NOMINA',0,0,'C');
-    // Salto de línea
-    $pdf->Ln(10);
-    $pdf->Cell(80);
-    // Título1
-    $pdf->Cell(50,10,'- SUELDO PERSONAL PRODUCCION -',0,0,'C');
-    $pdf->Ln(30);
 
 $pdf->SetFont('Times','B',12);
 $pdf->SetX(10);

@@ -52,14 +52,14 @@ $pdf->SetX(50);
 
     $pdf->Cell(35, 10, 'ID PROGRAMA', 1, 0, 'C', 0);
     $pdf->Cell(50, 10, 'NOMBRE PROGRAMA', 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, 'LOCACION', 1, 1, 'C', 0);
+    $pdf->Cell(50, 10, 'LOCACION', 1, 1, 'C', 0);
     $pdf->SetFont('Times','',12);
   
 while($row = $resultado->fetch_assoc()){
     $pdf->SetX(50);
     $pdf->Cell(35, 10, $row['idprog'], 1, 0, 'C', 0);
     $pdf->Cell(50, 10, $row['nombre'], 1, 0, 'C', 0);
-    $pdf->Cell(30, 10, $row['tipo'], 1, 1, 'C', 0);
+    $pdf->Cell(50, 10, $row['tipo'], 1, 1, 'C', 0);
 }
 
 $pdf->Output();

@@ -25,17 +25,17 @@
                 </li>
                 <li class="menu-title">ABM</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="actores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Actores</a>
-                    <a href="personas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Personas</a>
-                    <a href="ambientes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Ambientes</a>
-                    <a href="asistentes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Asistentes</a>
-                    <a href="canales.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Canales</a>
-                    <a href="directores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Directores</a>
-                    <a href="episodios.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Episodios</a>
-                    <a href="escenas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Escena</a>
-                    <a href="personalproduccion.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Personal Producción</a>
-                    <a href="programas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Programas</a>
-                    <a href="tecnicos.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Tecnicos</a>
+                    <a href="actores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-star"></i>Actores</a>
+                    <a href="personas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-male"></i>Personas</a>
+                    <a href="ambientes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-plane"></i>Ambientes</a>
+                    <a href="asistentes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Asistentes</a>
+                    <a href="canales.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-indent"></i>Canales</a>
+                    <a href="directores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bullhorn"></i>Directores</a>
+                    <a href="episodios.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-ol"></i>Episodios</a>
+                    <a href="escenas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-puzzle-piece"></i>Escena</a>
+                    <a href="personalproduccion.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Personal Producción</a>
+                    <a href="programas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-list-ul"></i>Programas</a>
+                    <a href="tecnicos.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-wrench"></i>Tecnicos</a>
                     <a href="base_datos/logout.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Salir</a>
                 </li>
                 

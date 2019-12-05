@@ -1,6 +1,6 @@
 <?php
-include('partes/header.php');
-include('base_datos/bd.php');
+include('../partes/header.php');
+include('../base_datos/bd.php');
 
 
 $query = "SELECT turno, COUNT(*) as cantidad FROM personalproduccion group by turno";
@@ -10,10 +10,10 @@ $query1 = "SELECT COUNT(*) as total FROM personalproduccion";
 $resp1 = mysqli_query($conexion, $query1);
 $row1 = mysqli_fetch_array($resp1);
 ?>
-<script src="High/code/highcharts.js"></script>
-<script src="High/code/highcharts-3d.js"></script>
-<script src="High/code/modules/exporting.js"></script>
-<script src="High/code/modules/export-data.js"></script>
+<script src="../High/code/highcharts.js"></script>
+<script src="../High/code/highcharts-3d.js"></script>
+<script src="../High/code/modules/exporting.js"></script>
+<script src="../High/code/modules/export-data.js"></script>
 
 <div class="content ">
     <div class="animated fadeIn ">
@@ -79,5 +79,5 @@ $row1 = mysqli_fetch_array($resp1);
     })
 </script>
 <?php
-include('partes/footer.php');
+include('../partes/footer.php');
 ?>

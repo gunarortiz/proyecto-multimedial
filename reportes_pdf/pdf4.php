@@ -1,5 +1,5 @@
 <?php
-require('fpdf/fpdf.php');
+require('../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -23,7 +23,7 @@ function Footer()
     $this->Cell(0,10,'Pagina '.$this->PageNo().'/{nb}',0,0,'C');
 }
 }
-include('base_datos/bd.php');
+include('../base_datos/bd.php');
 $consulta = "SELECT pe.idpersona, pe.ci, pe.nombre, pe.apellido, pe.telefono, p.turno, p.sueldo
 FROM personalproduccion p, persona pe
 WHERE (p.idper Like pe.idpersona)  

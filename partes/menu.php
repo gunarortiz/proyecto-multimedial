@@ -10,8 +10,26 @@
                     <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Actor</a>
                     
                 </li>
+                <li class="menu-title">ABM</li><!-- /.menu-title -->
+                <li class="">
+                    <a href="actores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Actores</a>
+                    <a href="ambientes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Ambientes</a>
+                    <a href="asistentes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Asistentes</a>
+                    <a href="canales.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Canales</a>
+                    <a href="directores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Directores</a>
+                    <a href="episodios.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Episodios</a>
+                    <a href="escenas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Escena</a>
+                    <a href="personalproduccion.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Personal Producción</a>
+                    <a href="programas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Programas</a>
+                    <a href="tecnicos.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Tecnicos</a>
+                </li>
                 
             </ul>
+           
+               
+                
+                
+           
         </div><!-- /.navbar-collapse -->
     </nav>
 </aside>

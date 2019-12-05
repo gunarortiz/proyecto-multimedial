@@ -1,15 +1,15 @@
 <?php
-include('partes/header.php');
-include('base_datos/bd.php');
+include('../partes/header.php');
+include('../base_datos/bd.php');
 
 $query = "SELECT idprog, nombre FROM programa p";
 $resp = mysqli_query($conexion, $query);
 
 
 ?>
-<script src="High/code/highcharts.js"></script>
-<script src="High/code/modules/exporting.js"></script>
-<script src="High/code/modules/export-data.js"></script>
+<script src="../High/code/highcharts.js"></script>
+<script src="../High/code/modules/exporting.js"></script>
+<script src="../High/code/modules/export-data.js"></script>
 <div class="content ">
     <div class="animated fadeIn ">
         <div class="row justify-content-center">
@@ -101,5 +101,5 @@ $resp = mysqli_query($conexion, $query);
     });
 </script>
 <?php
-include('partes/footer.php');
+include('../partes/footer.php');
 ?>

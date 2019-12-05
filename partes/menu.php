@@ -8,11 +8,19 @@
                 </li>
                 <li class="menu-title">Reportes</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Reportes en PDF</a>
+                    <a href="reportes_pdf.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Reportes en PDF</a>
                     
                 </li>
                 <li class="">
-                    <a href="#"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o "></i>Graficos</a>
+                    <a href="grafico1.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o "></i>Grafico 1</a>
+                    
+                </li>
+                <li class="">
+                    <a href="grafico2.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o "></i>Grafico 2</a>
+                    
+                </li>
+                <li class="">
+                    <a href="grafico3.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o "></i>Grafico 3</a>
                     
                 </li>
                 <li class="menu-title">ABM</li><!-- /.menu-title -->

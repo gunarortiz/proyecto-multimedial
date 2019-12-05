@@ -37,6 +37,13 @@
                     name="addpersona" value="Guardar"> 
                 </form>
             </div>
+            <hr class="mb-4">
+            <a href="listas_pdf/listaPersonaPDF.php">
+            <div class="boton-pdf">
+                <img src="assets/pdf.svg" style="margin-right: 10px" width="30px" alt="">
+                Descargar informe
+            </div>
+            </a>
         </div>
         <div class="col-md-8">
                 <table class="table table-bordered">

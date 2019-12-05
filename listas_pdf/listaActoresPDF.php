@@ -1,12 +1,12 @@
 <?php
-require('fpdf/fpdf.php');
-require('base_datos/bd.php');
+require('../fpdf/fpdf.php');
+require('../base_datos/bd.php');
 class PDF extends FPDF
 {
     //CABECERA
     function Header(){
         //logo
-        $this->Image('imagenes/logo.png',7,3,33);
+        $this->Image('../imagenes/logo.png',7,3,33);
         //arial bold 15
         $this->SetFont('Arial','B',15);
         //mov derecha

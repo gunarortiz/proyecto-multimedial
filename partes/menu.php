@@ -18,6 +18,7 @@
                 <li class="menu-title">ABM</li><!-- /.menu-title -->
                 <li class="">
                     <a href="actores.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Actores</a>
+                    <a href="personas.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Personas</a>
                     <a href="ambientes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Ambientes</a>
                     <a href="asistentes.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Asistentes</a>
                     <a href="canales.php"  aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Canales</a>

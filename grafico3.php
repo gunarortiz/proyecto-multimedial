@@ -1,6 +1,6 @@
 <?php
-include('../partes/header.php');
-include('../base_datos/bd.php');
+include('partes/header.php');
+include('base_datos/bd.php');
 
 
 $query = "SELECT pais,SUM(nrotemporadas) as temporadas, COUNT(*) as cantidad FROM programa GROUP by pais";
@@ -83,5 +83,5 @@ $resp1 = mysqli_query($conexion, $query);
 });
 </script>
 <?php
-include('../partes/footer.php');
+include('partes/footer.php');
 ?>

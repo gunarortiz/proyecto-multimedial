@@ -11,17 +11,17 @@ function Header()
     $this->SetLink($link);
     $this->Image('../imagenes/logo.png',10,8,33,0,'','http://www.redbolivision.tv.bo');
         // Arial bold 15
-        $pdf->SetFont('Arial','B',15);
+        $this->SetFont('Arial','B',15);
         // Movernos a la derecha
-        $pdf->Cell(80);
+        $this->Cell(80);
         // Título
-        $pdf->Cell(50,10,'NOMINA',0,0,'C');
+        $this->Cell(50,10,'NOMINA',0,0,'C');
         // Salto de línea
-        $pdf->Ln(10);
-        $pdf->Cell(80);
+        $this->Ln(10);
+        $this->Cell(80);
         // Título1
-        $pdf->Cell(50,10,'- SUELDO PERSONAL PRODUCCION -',0,0,'C');
-        $pdf->Ln(30);
+        $this->Cell(50,10,'- SUELDO PERSONAL PRODUCCION -',0,0,'C');
+        $this->Ln(30);
 }
 
 // Pie de página

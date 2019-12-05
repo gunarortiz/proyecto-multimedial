@@ -26,7 +26,7 @@ function Footer()
 include('../base_datos/bd.php');
 $consulta = "SELECT *
 FROM programa p, episodio e, escena es
-WHERE (p.idprog LIKE 'pro07') AND (e.idprog LIKE 'pro07') AND (e.idepi LIKE es.idepi)";
+WHERE (p.idprog LIKE '101') AND (e.idprog LIKE '101') AND (e.idepi LIKE es.idepi)";
 $resultado = $conexion->query($consulta);
 
 // Creación del objeto de la clase heredada
@@ -50,9 +50,9 @@ $pdf->AddPage();
 $pdf->SetFont('Times','B',11);
 $pdf->SetX(10);
 
-    $pdf->Cell(32, 10, 'ID PROGRAMA', 1, 0, 'C', 0);
-    $pdf->Cell(29, 10, 'ID EPISODIO', 1, 0, 'C', 0);
-    $pdf->Cell(45, 10, 'NOMBRE EPISODIO', 1, 0, 'C', 0);
+    $pdf->Cell(20, 10, 'ID PROG', 1, 0, 'C', 0);
+    $pdf->Cell(15, 10, 'ID EP', 1, 0, 'C', 0);
+    $pdf->Cell(65, 10, 'NOMBRE EPISODIO', 1, 0, 'C', 0);
     $pdf->Cell(31, 10, 'NRO. ESCENAS', 1, 0, 'C', 0);
     $pdf->Cell(30, 10, 'TEMPORADA', 1, 0, 'C', 0);
     $pdf->Cell(25, 10, 'DURACION', 1, 1, 'C', 0);
@@ -61,19 +61,19 @@ $pdf->SetX(10);
     $sum=0;
 while($row = $resultado->fetch_assoc()){
     $pdf->SetX(10);
-    $pdf->Cell(32, 10, $row['idprog'], 1, 0, 'C', 0);
-    $pdf->Cell(29, 10, $row['idepi'], 1, 0, 'C', 0);
-    $pdf->Cell(45, 10, $row['nombre'], 1, 0, 'C', 0);
+    $pdf->Cell(20, 10, $row['idprog'], 1, 0, 'C', 0);
+    $pdf->Cell(15, 10, $row['idepi'], 1, 0, 'C', 0);
+    $pdf->Cell(65, 10, $row['nombre'], 1, 0, 'C', 0);
     $pdf->Cell(31, 10, $row['nroescena'], 1, 0, 'C', 0);
     $pdf->Cell(30, 10, $row['nrotemporada'], 1, 0, 'C', 0);
     $pdf->Cell(25, 10, $row['duracion'], 1, 1, 'C', 0);
-    $sum=$sum+$row['duracion'];
+   // $sum=$sum+$row['duracion'];
 }
 $pdf->Ln(10);
 $pdf->SetFont('Arial','B',10);
 $pdf->SetX(90);
     $pdf->Cell(70, 10, 'Duracion total del Programa: ', 0, 0, 'C', 0);
-     $pdf->Cell(10, 10, $sum, 0, 0, 'C', 0);
+    // $pdf->Cell(10, 10, $sum, 0, 0, 'C', 0);
      $pdf->Cell(10, 10, 'horas ', 0, 1, 'C', 0);
 $consulta2 = "SELECT *
 FROM programa p, episodio e, escena es

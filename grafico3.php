@@ -10,10 +10,10 @@ $resp = mysqli_query($conexion, $query);
 $resp1 = mysqli_query($conexion, $query);
 
 ?>
-<script src="../High/code/highcharts.js"></script>
+<script src="High/code/highcharts.js"></script>
 <!-- <script src="High/code/highcharts-3d.js"></script> -->
-<script src="../High/code/modules/exporting.js"></script>
-<script src="../High/code/modules/export-data.js"></script>
+<script src="High/code/modules/exporting.js"></script>
+<script src="High/code/modules/export-data.js"></script>
 
 <div class="content ">
     <div class="animated fadeIn ">

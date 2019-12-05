@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2019 a las 16:21:08
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Host: localhost
+-- Generation Time: Dec 05, 2019 at 05:18 PM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.2.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,24 +19,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `serietelevision`
+-- Database: `serietelevision`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `actor`
+-- Table structure for table `actor`
 --
 
 CREATE TABLE `actor` (
   `idactor` int(11) NOT NULL,
   `sueldo` int(11) DEFAULT NULL,
-  `tipo` text,
+  `tipo` text DEFAULT NULL,
   `anio_debut` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `actor`
+-- Dumping data for table `actor`
 --
 
 INSERT INTO `actor` (`idactor`, `sueldo`, `tipo`, `anio_debut`) VALUES
@@ -85,16 +85,36 @@ INSERT INTO `actor` (`idactor`, `sueldo`, `tipo`, `anio_debut`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ambiente`
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `passcode` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `active` varchar(10) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `passcode`, `active`) VALUES
+(1, 'admin', 'admin', 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ambiente`
 --
 
 CREATE TABLE `ambiente` (
   `idambiente` int(11) NOT NULL,
-  `tipo` text
+  `tipo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `ambiente`
+-- Dumping data for table `ambiente`
 --
 
 INSERT INTO `ambiente` (`idambiente`, `tipo`) VALUES
@@ -117,16 +137,16 @@ INSERT INTO `ambiente` (`idambiente`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asistente`
+-- Table structure for table `asistente`
 --
 
 CREATE TABLE `asistente` (
   `idasi` int(11) NOT NULL,
-  `especialidad` text
+  `especialidad` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `asistente`
+-- Dumping data for table `asistente`
 --
 
 INSERT INTO `asistente` (`idasi`, `especialidad`) VALUES
@@ -171,17 +191,17 @@ INSERT INTO `asistente` (`idasi`, `especialidad`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `canal`
+-- Table structure for table `canal`
 --
 
 CREATE TABLE `canal` (
   `idcanal` int(11) NOT NULL,
   `nroemi` int(11) DEFAULT NULL,
-  `nombrec` text
+  `nombrec` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `canal`
+-- Dumping data for table `canal`
 --
 
 INSERT INTO `canal` (`idcanal`, `nroemi`, `nombrec`) VALUES
@@ -208,7 +228,7 @@ INSERT INTO `canal` (`idcanal`, `nroemi`, `nombrec`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cuenta`
+-- Table structure for table `cuenta`
 --
 
 CREATE TABLE `cuenta` (
@@ -217,7 +237,7 @@ CREATE TABLE `cuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `cuenta`
+-- Dumping data for table `cuenta`
 --
 
 INSERT INTO `cuenta` (`idprog`, `idper`) VALUES
@@ -299,16 +319,16 @@ INSERT INTO `cuenta` (`idprog`, `idper`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `director`
+-- Table structure for table `director`
 --
 
 CREATE TABLE `director` (
   `iddire` int(11) NOT NULL,
-  `cargo` text
+  `cargo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `director`
+-- Dumping data for table `director`
 --
 
 INSERT INTO `director` (`iddire`, `cargo`) VALUES
@@ -346,18 +366,18 @@ INSERT INTO `director` (`iddire`, `cargo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `episodio`
+-- Table structure for table `episodio`
 --
 
 CREATE TABLE `episodio` (
   `idepi` int(11) NOT NULL,
-  `nombre` text,
+  `nombre` text DEFAULT NULL,
   `nrotemporada` int(11) DEFAULT NULL,
   `idProg` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `episodio`
+-- Dumping data for table `episodio`
 --
 
 INSERT INTO `episodio` (`idepi`, `nombre`, `nrotemporada`, `idProg`) VALUES
@@ -452,17 +472,17 @@ INSERT INTO `episodio` (`idepi`, `nombre`, `nrotemporada`, `idProg`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `escena`
+-- Table structure for table `escena`
 --
 
 CREATE TABLE `escena` (
   `nroescena` int(11) NOT NULL,
   `idepi` int(11) NOT NULL,
-  `duracion` text
+  `duracion` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `escena`
+-- Dumping data for table `escena`
 --
 
 INSERT INTO `escena` (`nroescena`, `idepi`, `duracion`) VALUES
@@ -636,20 +656,20 @@ INSERT INTO `escena` (`nroescena`, `idepi`, `duracion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `persona`
+-- Table structure for table `persona`
 --
 
 CREATE TABLE `persona` (
   `idpersona` int(11) NOT NULL,
-  `nombre` text,
-  `apellido` text,
+  `nombre` text DEFAULT NULL,
+  `apellido` text DEFAULT NULL,
   `ci` int(11) DEFAULT NULL,
   `fecha_nac` date DEFAULT NULL,
-  `telefono` text
+  `telefono` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `persona`
+-- Dumping data for table `persona`
 --
 
 INSERT INTO `persona` (`idpersona`, `nombre`, `apellido`, `ci`, `fecha_nac`, `telefono`) VALUES
@@ -782,17 +802,17 @@ INSERT INTO `persona` (`idpersona`, `nombre`, `apellido`, `ci`, `fecha_nac`, `te
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `personalproduccion`
+-- Table structure for table `personalproduccion`
 --
 
 CREATE TABLE `personalproduccion` (
   `idper` int(11) NOT NULL,
-  `turno` text,
+  `turno` text DEFAULT NULL,
   `sueldo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `personalproduccion`
+-- Dumping data for table `personalproduccion`
 --
 
 INSERT INTO `personalproduccion` (`idper`, `turno`, `sueldo`) VALUES
@@ -877,7 +897,7 @@ INSERT INTO `personalproduccion` (`idper`, `turno`, `sueldo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `posee`
+-- Table structure for table `posee`
 --
 
 CREATE TABLE `posee` (
@@ -886,7 +906,7 @@ CREATE TABLE `posee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `posee`
+-- Dumping data for table `posee`
 --
 
 INSERT INTO `posee` (`idprog`, `idactor`) VALUES
@@ -935,19 +955,19 @@ INSERT INTO `posee` (`idprog`, `idactor`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `programa`
+-- Table structure for table `programa`
 --
 
 CREATE TABLE `programa` (
   `idprog` int(11) NOT NULL,
-  `nombre` text,
-  `genero` text,
+  `nombre` text DEFAULT NULL,
+  `genero` text DEFAULT NULL,
   `nrotemporadas` int(11) DEFAULT NULL,
-  `pais` text
+  `pais` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `programa`
+-- Dumping data for table `programa`
 --
 
 INSERT INTO `programa` (`idprog`, `nombre`, `genero`, `nrotemporadas`, `pais`) VALUES
@@ -970,7 +990,7 @@ INSERT INTO `programa` (`idprog`, `nombre`, `genero`, `nrotemporadas`, `pais`) V
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `se_realiza`
+-- Table structure for table `se_realiza`
 --
 
 CREATE TABLE `se_realiza` (
@@ -979,7 +999,7 @@ CREATE TABLE `se_realiza` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `se_realiza`
+-- Dumping data for table `se_realiza`
 --
 
 INSERT INTO `se_realiza` (`idambiente`, `idprog`) VALUES
@@ -1002,18 +1022,18 @@ INSERT INTO `se_realiza` (`idambiente`, `idprog`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `se_transmite`
+-- Table structure for table `se_transmite`
 --
 
 CREATE TABLE `se_transmite` (
   `idcanal` int(11) NOT NULL,
   `idepi` int(11) NOT NULL,
-  `hora_ini` text,
-  `hora_fin` text
+  `hora_ini` text DEFAULT NULL,
+  `hora_fin` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `se_transmite`
+-- Dumping data for table `se_transmite`
 --
 
 INSERT INTO `se_transmite` (`idcanal`, `idepi`, `hora_ini`, `hora_fin`) VALUES
@@ -1108,16 +1128,16 @@ INSERT INTO `se_transmite` (`idcanal`, `idepi`, `hora_ini`, `hora_fin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tecnico`
+-- Table structure for table `tecnico`
 --
 
 CREATE TABLE `tecnico` (
   `idtec` int(11) NOT NULL,
-  `mat_trabajo` text
+  `mat_trabajo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tecnico`
+-- Dumping data for table `tecnico`
 --
 
 INSERT INTO `tecnico` (`idtec`, `mat_trabajo`) VALUES
@@ -1171,109 +1191,109 @@ INSERT INTO `tecnico` (`idtec`, `mat_trabajo`) VALUES
 (114, 'escenografia');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `actor`
+-- Indexes for table `actor`
 --
 ALTER TABLE `actor`
   ADD PRIMARY KEY (`idactor`);
 
 --
--- Indices de la tabla `ambiente`
+-- Indexes for table `ambiente`
 --
 ALTER TABLE `ambiente`
   ADD PRIMARY KEY (`idambiente`);
 
 --
--- Indices de la tabla `asistente`
+-- Indexes for table `asistente`
 --
 ALTER TABLE `asistente`
   ADD PRIMARY KEY (`idasi`);
 
 --
--- Indices de la tabla `canal`
+-- Indexes for table `canal`
 --
 ALTER TABLE `canal`
   ADD PRIMARY KEY (`idcanal`);
 
 --
--- Indices de la tabla `cuenta`
+-- Indexes for table `cuenta`
 --
 ALTER TABLE `cuenta`
   ADD PRIMARY KEY (`idprog`,`idper`);
 
 --
--- Indices de la tabla `director`
+-- Indexes for table `director`
 --
 ALTER TABLE `director`
   ADD PRIMARY KEY (`iddire`);
 
 --
--- Indices de la tabla `episodio`
+-- Indexes for table `episodio`
 --
 ALTER TABLE `episodio`
   ADD PRIMARY KEY (`idepi`),
   ADD KEY `idProg` (`idProg`);
 
 --
--- Indices de la tabla `escena`
+-- Indexes for table `escena`
 --
 ALTER TABLE `escena`
   ADD PRIMARY KEY (`nroescena`,`idepi`);
 
 --
--- Indices de la tabla `persona`
+-- Indexes for table `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idpersona`);
 
 --
--- Indices de la tabla `personalproduccion`
+-- Indexes for table `personalproduccion`
 --
 ALTER TABLE `personalproduccion`
   ADD PRIMARY KEY (`idper`);
 
 --
--- Indices de la tabla `posee`
+-- Indexes for table `posee`
 --
 ALTER TABLE `posee`
   ADD PRIMARY KEY (`idprog`,`idactor`);
 
 --
--- Indices de la tabla `programa`
+-- Indexes for table `programa`
 --
 ALTER TABLE `programa`
   ADD PRIMARY KEY (`idprog`);
 
 --
--- Indices de la tabla `se_realiza`
+-- Indexes for table `se_realiza`
 --
 ALTER TABLE `se_realiza`
   ADD PRIMARY KEY (`idambiente`,`idprog`);
 
 --
--- Indices de la tabla `se_transmite`
+-- Indexes for table `se_transmite`
 --
 ALTER TABLE `se_transmite`
   ADD PRIMARY KEY (`idcanal`,`idepi`);
 
 --
--- Indices de la tabla `tecnico`
+-- Indexes for table `tecnico`
 --
 ALTER TABLE `tecnico`
   ADD PRIMARY KEY (`idtec`);
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `episodio`
+-- Constraints for table `episodio`
 --
 ALTER TABLE `episodio`
-  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`idProg`) REFERENCES `programa` (`idProg`);
+  ADD CONSTRAINT `episodio_ibfk_1` FOREIGN KEY (`idProg`) REFERENCES `programa` (`idprog`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
